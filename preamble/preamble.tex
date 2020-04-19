@@ -1,0 +1,108 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ESSENTIAL PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel} % Language
+\usepackage{hyperref} % Hyperlinks
+\usepackage{graphicx} % Pictures
+\usepackage{float} % Pictures
+\usepackage{epstopdf} %converting to PDF
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FONTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+
+% Linux Libertine
+\usepackage{libertine}
+\usepackage{libertinust1math}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MARGIN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Default book margins
+% \usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
+
+\ifthenelse{\boolean{book}}{
+    % Margins for only 2400 characters including spaces on one page - book style
+    \usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
+}{
+    % Margins for only 2400 characters including spaces on one page - article style
+    \usepackage{geometry}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Here the definitions of variables are defined
+\input{preamble/variableDefinitions} 
+
+% Default values for the above variable definitions (only to try out the layout, so cannot be imported alongside documentPoperties.tex - only one of them at the time)
+% \input{preamble/defaultVariableValues}
+
+% Actual values for the document
+\input{documentProperties.tex} % The actual values
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% HEADER AND FOOTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Import package for custom header and footer
+\usepackage{fancyhdr}
+\fancyhf{}
+
+% Define \rightorleftmark, i.e. choose \leftmark if rightmark is empty
+\makeatletter
+\newcommand{\rightorleftmark}{%
+  \begingroup\protected@edef\x{\rightmark}%
+  \ifx\x\@empty
+    \endgroup\leftmark
+  \else
+    \endgroup\rightmark
+  \fi}
+\makeatother
+
+% Header and footer
+\ifthenelse{\boolean{book}}{
+    % Even pages (if two sided, i.e. ''book'' option)
+    \fancyhead[LE]{\textsf{\nouppercase{\leftmark}}}
+    \fancyhead[RE]{\thepage}
+    
+    % Odd pages (if two sided, i.e. ''book'' option)
+    \fancyhead[RO]{\textsf{\nouppercase{\rightmark}}}
+    \fancyhead[LO]{\thepage}
+}{
+    \fancyhead[L]{\textsf{\nouppercase{\rightorleftmark}}}
+    \fancyhead[R]{\thepage}
+}
+
+% No horisontal lines to devide main section from header and footer
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Chapter pages uses the plain page style
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+}
+
+% For the appendix (if use of backmatter)
+\makeatletter
+\renewcommand{\sectionmark}[1]{\markright{\thesection~~#1}}
+\renewcommand{\chaptermark}[1]{\markboth{\if@mainmatter\chaptername\ \thechapter~~\fi#1}{}}
+\makeatother
+
+% Sets the page style
+\pagestyle{fancy}
+
+% Change how the header looks for the chapter name and section name respectively
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter~~$\bullet$~~#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~~#1}}

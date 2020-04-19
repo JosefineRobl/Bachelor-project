@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% VARIABLE DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The year and month the degree is awarded
+\newcommand{\Year}[1]{\gdef\Year{#1}}
+\newcommand{\Month}[1]{\gdef\Month{#1}}
+
+\newcommand{\Date}[1]{\gdef\Date{#1}} % Date of hand in
+
+% The full name of the degree
+\newcommand{\Degree}[1]{\gdef\Degree{#1}}
+
+% The short name of the degree (i.e. "bachelor" instead for the full name "bachelor of science")
+\newcommand{\DegreeShort}[1]{\gdef\DegreeShort{#1}}
+
+% The type of document (thesis/dissertation/project)
+\newcommand{\Doctype}[1]{\gdef\Doctype{#1}}
+
+% The title
+\newcommand{\Title}[1]{\gdef\Title{#1}}
+
+% The author's name
+\newcommand{\Author}[1]{\gdef\Author{#1}}
+
+% The author's e-mail (with clickable mail, such that it opens ones mail program; this is due to the href)
+\newcommand{\AuthorEmail}[1]{\gdef\AuthorEmail{\href{mailto:#1}{#1}}}
+
+% The univeristy name
+\newcommand{\University}[1]{\gdef\University{#1}}
+
+% The faculty name
+\newcommand{\Faculty}[1]{\gdef\Faculty{#1}}
+
+% The research group name
+\newcommand{\Researchgroup}[1]{\gdef\Researchgroup{#1}}
+
+% The department name
+\newcommand{\Department}[1]{\gdef\Department{#1}}
+
+% The address of the department
+\newcommand{\DepartmentAddress}[1]{\gdef\DepartmentAddress{#1}}
+
+% The name of the supervisor
+\newcommand{\Supervisor}[1]{\gdef\Supervisor{#1}}
+
+% The title of the supervisor
+\newcommand{\SupervisorTitle}[1]{\gdef\SupervisorTitle{#1}}
+
+% Subject one is studying
+\newcommand{\SubjectOfStudy}[1]{\gdef\SubjectOfStudy{#1}}

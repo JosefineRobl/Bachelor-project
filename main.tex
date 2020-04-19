@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT CLASS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Document class is the Koma script book class
+\documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover,DIV=10]{scrbook}
+
+% Document class is the Koma script report class
+% \documentclass[paper=a4, fontsize=12pt, DIV=10]{scrreprt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To use if-then-else statements
+\usepackage{ifthen}
+\newboolean{book} % Definition of the boolean ''book''
+\setboolean{book}{true} % Sets the value of the boolean ''book'' to either true or false
+
+% Document properties
+\title{\Title} % Title
+\author{\Author} % Author
+\date{\Month~\Year} % Hand in date
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To compile documents separately
+\usepackage{subfiles}
+
+% Input the preamble
+\input{preamble/preamble.tex}
+
+
+% \usepackage{scrlayer-scrpage}
+% \clearpairofpagestyles
+% \cfoot*{\pagemark}
+
+\usepackage{lipsum}% for dummy text
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%% FRONTMATTER %%%%%%%%%%%%%%%%%%%%
+
+{\pagestyle{plain}
+
+% Sets page numbers to roman (thus marking the front matter)
+\ifthenelse{\boolean{book}}{
+    \frontmatter
+}{
+    \pagenumbering{roman}
+}
+
+% Import frontpage
+\subfile{beforeText/frontpage.tex}
+
+% Only include colophon in scrbook class
+\ifthenelse{\boolean{book}}{
+    \subfile{beforeText/colophon.tex}\newpage
+}{}
+
+\setcounter{page}{1} % Sets page numbering to first begin after title page (with colophon on the inside)
+
+\subfile{beforeText/abstract.tex}
+
+\ifthenelse{\boolean{book}}{
+    \cleardoublepage % Only uses cleardoublepage if documentclass is scrbook
+}{
+    \newpage % Only uses newpage if documentclass is scrreprt
+}
+
+\subfile{beforeText/resume.tex}
+}
+\clearpage
+\pagestyle{fancy}
+
+\subfile{beforeText/preface.tex}
+
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%% MAINMATTER %%%%%%%%%%%%%%%%%%%%
+
+% Sets page numbers to arabic (thus marking the main section)
+\ifthenelse{\boolean{book}}{
+    \mainmatter
+}{
+    \clearpage % Arabic numbers first sets in after TOC page
+    \pagenumbering{arabic}
+}
+
+\chapter{Hejsa}
+\section{Introduction}
+Hej med dig
+\newpage
+\subsection{Hej}
+Hej
+\newpage
+\subsubsection{Hejsa subsection}
+Hej igen
+
+
+
+\chapter{Chapter One}
+\lipsum
+
+\newpage
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean viverra ultrices elit in congue. Sed augue lacus, venenatis vel nibh vel, molestie auctor odio. Pellentesque luctus magna eget urna varius porttitor. Pellentesque faucibus semper auctor. Mauris purus sem, pellentesque nec lacus in, posuere fringilla elit. Aliquam erat volutpat. Donec non tempor nisi. Praesent placerat, ex ac blandit venenatis, ipsum arcu dapibus ex, eu dignissim nunc mauris nec mi. Vestibulum faucibus justo diam, vel convallis lorem ultricies in. In hac habitasse platea dictumst.
+
+Mauris id eros pretium nunc vulputate tempor in at leo. Ut eu nisl a ligula elementum ullamcorper. Quisque sed auctor purus. Maecenas sagittis, felis et sodales vehicula, augue lorem posuere sem, at sodales ex dolor viverra orci. Nulla eu ex vestibulum, vulputate justo id, fermentum tortor. Nam sed orci a augue lobortis pulvinar. Morbi metus sapien, dapibus quis quam ac, interdum efficitur elit. Vestibulum ultricies orci vitae sem suscipit, euismod sollicitudin dui volutpat. Etiam molestie, augue et pulvinar accumsan, ex justo viverra sem, iaculis lacinia sem lorem efficitur risus. Donec pulvinar massa quam, in egestas sem ultricies tincidunt. Vestibulum nec nunc sed mauris mattis imperdiet at vel ex. Sed id elementum dui, quis placerat neque. Nam aliquam massa quis lectus gravida, semper dapibus ante consectetur. Sed finibus rhoncus risus sit amet venenatis. Vestibulum tincidunt velit a tincidunt sodales. Donec dictum nec leo et faucibus.
+
+Proin semper leo vitae placerat varius. Morbi sit amet viverra nunc. Etiam aliquam sodales magna, vitae pretium elit. Mauris arcu purus, fermentum id iaculis sodales, ultrices sed tortor. Nunc eget augue non justo ornare ultrices in ac elit. Nunc fermentum semper nunc in elementum. Praesent laoreet tellus ac tellus molestie malesuada. Nulla pretium, dolor ut pretium placerat, elit sapien egestas nibh, ut mollis odio turpis sed risus. Nullam id commodo leo. Mauris diam lacus, aliquam a sapien sit amet, vestibulum interdum leo. In sed congue massa. Maecenas eu dignissim sem, at mollis libero.
+
+Sed dapibus tortor sit amet risus tincidunt congue. Suspendisse vestibulum pharetra enim eu ultricies. Cras velit lacus, scelerisque in tellus sed, bibendum ornare odio. Duis vulputate ligula nulla, a sollicitudin orci vehicula in. Quisque eu diam vitae felis laoreet lacinia. Curabitu 
+
+
+
+
+\end{document}

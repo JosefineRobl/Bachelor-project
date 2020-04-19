@@ -1,0 +1,58 @@
+\documentclass[../main.tex]{subfiles} % Due to use of package subfiles
+
+\newcommand\TitleHUGE{\fontsize{32}{40}\selectfont} % New font for the title
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\newgeometry{lmargin=3cm, rmargin=3cm, tmargin=4cm, bmargin=3cm} % Sets the margins for the front page
+
+\begin{titlepage} % Beginning title page
+    \centering
+    
+    % Title in small caps
+    \textsc{\TitleHUGE{\Title}}\\
+    
+    % Front page image
+    \begin{figure}[ht!] % Begin front page image
+        \begin{center}
+            \includegraphics[height=8cm]{beforeText/frontpageImages/frontPageImage.PNG}
+        \end{center}
+    \end{figure} % End front page image
+    
+    \vfill
+    
+    % Author and supervisor
+    \textsc{\LARGE{\Author}}\\\vspace{2em} % Author
+    \textsc{\large{Supervisor: \Supervisor}}\\\bigskip % Supervisor
+    
+    \vfill
+    
+    % Description text
+    A \MakeLowercase{\Doctype} submitted to\\
+    \University\ for the degree of\\
+    \textsc{\Degree}\bigskip\\
+    
+    % Logos
+    \begin{figure}[ht!] % Logo images begin
+        \begin{center}
+            \includegraphics[height=3cm]{beforeText/frontpageImages/IFALogo.png}
+            \hspace{1em}
+            \includegraphics[height=3cm]{beforeText/frontpageImages/auseglSort.eps}
+        \end{center}
+    \end{figure} % Logo images end
+    
+    % Information on university etc.
+    \Department\par
+    \Faculty\par
+    \University\par
+    \Month\ \Date, \Year
+    
+\end{titlepage} % Ending title page
+
+\restoregeometry % Sets the geometry (margins) back to the in preamble defined
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
