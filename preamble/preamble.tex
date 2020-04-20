@@ -1,4 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% To use if-then-else statements
+\usepackage{ifthen}
+\newboolean{book} % Definition of the boolean ''book''
+% Sets the boolean ''book'' to true if class is ''scrbook'' and false if other class
+\makeatletter
+    \@ifclassloaded{scrbook}{\setboolean{book}{true}}{\setboolean{book}{false}}
+\makeatother
+
+% Document properties
+\title{\Title} % Title
+\author{\Author} % Author
+\date{\Month~\Year} % Hand in date
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ESSENTIAL PACKAGES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -74,14 +92,14 @@
 \ifthenelse{\boolean{book}}{
     % Even pages (if two sided, i.e. ''book'' option)
     \fancyhead[LE]{\textsf{\nouppercase{\leftmark}}}
-    \fancyhead[RE]{\thepage}
+    \fancyhead[RE]{\textsf{\thepage}}
     
     % Odd pages (if two sided, i.e. ''book'' option)
     \fancyhead[RO]{\textsf{\nouppercase{\rightmark}}}
-    \fancyhead[LO]{\thepage}
+    \fancyhead[LO]{\textsf{\thepage}}
 }{
     \fancyhead[L]{\textsf{\nouppercase{\rightorleftmark}}}
-    \fancyhead[R]{\thepage}
+    \fancyhead[R]{\textsf{\thepage}}
 }
 
 % No horisontal lines to devide main section from header and footer
@@ -91,7 +109,7 @@
 % Chapter pages uses the plain page style
 \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyfoot[C]{\thepage}
+    \fancyfoot[C]{\textsf{\thepage}}
 }
 
 % For the appendix (if use of backmatter)
@@ -106,3 +124,50 @@
 % Change how the header looks for the chapter name and section name respectively
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter~~$\bullet$~~#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection~~#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TABLE OF CONTENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set font for the chapter entries to serif and bold (addtokomafont is used to add the serif part to the already defined bold entries. setkomafont would have overruled)
+\addtokomafont{chapterentry}{\rmfamily}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CHAPTER STYLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Change the font size of the chapter name and number
+\usepackage{anyfontsize}
+
+% Font of the chapter title
+\setkomafont{chapter}{\mdseries\Huge}
+
+% Chapter number in serif
+\addtokomafont{chapterprefix}{\rmfamily}
+
+% Chapter title placement down from the top
+% \renewcommand*{\chapterheadstartvskip}{\vspace*{5\baselineskip}}
+
+% Vertical space between chapter title and text
+\renewcommand*{\chapterheadendvskip}{\vspace*{3\baselineskip}}
+
+% Keep all the percentage tags right after the commands since there will otherwise be spaces that ruins the layout
+\renewcommand*{\chapterformat}{%
+  {\fontsize{15}{30}\scshape\chapappifchapterprefix{}}% % Changes 'CHAPTER' apperance
+  \fontsize{50}{30}\selectfont\rlap{~\thechapter\autodot}% % Changes numbers apperance and \rlap shifts the number to the right
+  \par\vspace{-.25em}{\rule{\textwidth}{.5pt}}% % Horisontal line
+  \vspace{-.2em}% % Correct distance from line to chapter title
+}
+
+% Placement of title and ect. to the right
+\renewcommand*{\raggedchapter}{\raggedleft}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{biblatex}
+\bibliography{bibliography.bib}

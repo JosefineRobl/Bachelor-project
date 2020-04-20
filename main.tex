@@ -3,41 +3,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Document class is the Koma script book class
-\documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover,DIV=10]{scrbook}
+\documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, DIV=10]{scrbook}
 
 % Document class is the Koma script report class
-% \documentclass[paper=a4, fontsize=12pt, DIV=10]{scrreprt}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% DEFINITIONS
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% To use if-then-else statements
-\usepackage{ifthen}
-\newboolean{book} % Definition of the boolean ''book''
-\setboolean{book}{true} % Sets the value of the boolean ''book'' to either true or false
-
-% Document properties
-\title{\Title} % Title
-\author{\Author} % Author
-\date{\Month~\Year} % Hand in date
-
+% \documentclass[paper=a4, fontsize=12pt, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, DIV=10]{scrreprt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% PACKAGES
+%%% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Input the preamble
+\input{preamble/preamble.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SUBFILES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % To compile documents separately
 \usepackage{subfiles}
 
-% Input the preamble
-\input{preamble/preamble.tex}
 
-
-% \usepackage{scrlayer-scrpage}
-% \clearpairofpagestyles
-% \cfoot*{\pagemark}
 
 \usepackage{lipsum}% for dummy text
 
@@ -51,8 +36,6 @@
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%% FRONTMATTER %%%%%%%%%%%%%%%%%%%%
-
-{\pagestyle{plain}
 
 % Sets page numbers to roman (thus marking the front matter)
 \ifthenelse{\boolean{book}}{
@@ -80,10 +63,6 @@
 }
 
 \subfile{beforeText/resume.tex}
-}
-\clearpage
-\pagestyle{fancy}
-
 \subfile{beforeText/preface.tex}
 
 
@@ -99,6 +78,9 @@
     \clearpage % Arabic numbers first sets in after TOC page
     \pagenumbering{arabic}
 }
+
+% Imports the files containing the main text
+\subfile{text/introduction.tex}
 
 \chapter{Hejsa}
 \section{Introduction}
@@ -123,9 +105,11 @@ Mauris id eros pretium nunc vulputate tempor in at leo. Ut eu nisl a ligula elem
 
 Proin semper leo vitae placerat varius. Morbi sit amet viverra nunc. Etiam aliquam sodales magna, vitae pretium elit. Mauris arcu purus, fermentum id iaculis sodales, ultrices sed tortor. Nunc eget augue non justo ornare ultrices in ac elit. Nunc fermentum semper nunc in elementum. Praesent laoreet tellus ac tellus molestie malesuada. Nulla pretium, dolor ut pretium placerat, elit sapien egestas nibh, ut mollis odio turpis sed risus. Nullam id commodo leo. Mauris diam lacus, aliquam a sapien sit amet, vestibulum interdum leo. In sed congue massa. Maecenas eu dignissim sem, at mollis libero.
 
-Sed dapibus tortor sit amet risus tincidunt congue. Suspendisse vestibulum pharetra enim eu ultricies. Cras velit lacus, scelerisque in tellus sed, bibendum ornare odio. Duis vulputate ligula nulla, a sollicitudin orci vehicula in. Quisque eu diam vitae felis laoreet lacinia. Curabitu 
+Sed dapibus tortor sit amet risus tincidunt congue. Suspendisse vestibulum pharetra enim eu ultricies. Cras velit lacus, scelerisque in tellus sed, bibendum ornare odio. Duis vulputate ligula nulla, a sollicitudin orci vehicula in. Quisque eu diam vitae felis laoreet lacinia. Curabitu\cite{test}
 
 
+
+\printbibliography
 
 
 \end{document}
