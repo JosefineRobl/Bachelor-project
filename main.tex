@@ -3,10 +3,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Document class is the Koma script book class
-\documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, DIV=10]{scrbook}
+% \documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, bibliography=totoc, index=totoc, DIV=10]{scrbook}
 
 % Document class is the Koma script report class
-% \documentclass[paper=a4, fontsize=12pt, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, DIV=10]{scrreprt}
+\documentclass[paper=a4, fontsize=12pt, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, bibliography=totoc, DIV=10]{scrreprt}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% PREAMBLE
@@ -24,11 +25,7 @@
 
 
 
-\usepackage{lipsum}% for dummy text
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEGIN DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,6 +63,13 @@
 \subfile{beforeText/preface.tex}
 
 
+% Needs to be here if bookmarks shall be used
+\ifthenelse{\boolean{book}}{
+    \cleardoublepage % Only uses cleardoublepage if documentclass is scrbook
+}{
+    \newpage % Only uses newpage if documentclass is scrreprt
+}
+\pdfbookmark[0]{\contentsname}{toc} % Bookmark in PDF
 \tableofcontents
 
 
@@ -80,36 +84,30 @@
 }
 
 % Imports the files containing the main text
+
 \subfile{text/introduction.tex}
-
-\chapter{Hejsa}
-\section{Introduction}
-Hej med dig
-\newpage
-\subsection{Hej}
-Hej
-\newpage
-\subsubsection{Hejsa subsection}
-Hej igen
+\subfile{text/QFT-andGaugeTheory.tex}
+\subfile{text/QFT-ofLattice.tex}
+\subfile{text/confinement.tex}
+\subfile{text/conclusion.tex}
 
 
-
-\chapter{Chapter One}
-\lipsum
-
-\newpage
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean viverra ultrices elit in congue. Sed augue lacus, venenatis vel nibh vel, molestie auctor odio. Pellentesque luctus magna eget urna varius porttitor. Pellentesque faucibus semper auctor. Mauris purus sem, pellentesque nec lacus in, posuere fringilla elit. Aliquam erat volutpat. Donec non tempor nisi. Praesent placerat, ex ac blandit venenatis, ipsum arcu dapibus ex, eu dignissim nunc mauris nec mi. Vestibulum faucibus justo diam, vel convallis lorem ultricies in. In hac habitasse platea dictumst.
-
-Mauris id eros pretium nunc vulputate tempor in at leo. Ut eu nisl a ligula elementum ullamcorper. Quisque sed auctor purus. Maecenas sagittis, felis et sodales vehicula, augue lorem posuere sem, at sodales ex dolor viverra orci. Nulla eu ex vestibulum, vulputate justo id, fermentum tortor. Nam sed orci a augue lobortis pulvinar. Morbi metus sapien, dapibus quis quam ac, interdum efficitur elit. Vestibulum ultricies orci vitae sem suscipit, euismod sollicitudin dui volutpat. Etiam molestie, augue et pulvinar accumsan, ex justo viverra sem, iaculis lacinia sem lorem efficitur risus. Donec pulvinar massa quam, in egestas sem ultricies tincidunt. Vestibulum nec nunc sed mauris mattis imperdiet at vel ex. Sed id elementum dui, quis placerat neque. Nam aliquam massa quis lectus gravida, semper dapibus ante consectetur. Sed finibus rhoncus risus sit amet venenatis. Vestibulum tincidunt velit a tincidunt sodales. Donec dictum nec leo et faucibus.
-
-Proin semper leo vitae placerat varius. Morbi sit amet viverra nunc. Etiam aliquam sodales magna, vitae pretium elit. Mauris arcu purus, fermentum id iaculis sodales, ultrices sed tortor. Nunc eget augue non justo ornare ultrices in ac elit. Nunc fermentum semper nunc in elementum. Praesent laoreet tellus ac tellus molestie malesuada. Nulla pretium, dolor ut pretium placerat, elit sapien egestas nibh, ut mollis odio turpis sed risus. Nullam id commodo leo. Mauris diam lacus, aliquam a sapien sit amet, vestibulum interdum leo. In sed congue massa. Maecenas eu dignissim sem, at mollis libero.
-
-Sed dapibus tortor sit amet risus tincidunt congue. Suspendisse vestibulum pharetra enim eu ultricies. Cras velit lacus, scelerisque in tellus sed, bibendum ornare odio. Duis vulputate ligula nulla, a sollicitudin orci vehicula in. Quisque eu diam vitae felis laoreet lacinia. Curabitu\cite{test}
-
-
-
+% Prints the bibliography
 \printbibliography
+
+% If book style
+\ifthenelse{\boolean{book}}{
+    % Sets the bookmark for the index
+    \cleardoublepage % Needs to be here if bookmarks shall be used
+    \phantomsection
+    \pdfbookmark[0]{\indexname}{index} % Bookmark in PDF
+    
+    % Makes an index of the book
+    \printindex
+    
+    % Imports a back cover to the book
+    \subfile{afterText/backCover.tex}
+}{}
 
 
 \end{document}

@@ -1,10 +1,12 @@
 \documentclass[../main.tex]{subfiles} % Due to use of package subfiles
 
-\newcommand\TitleHUGE{\fontsize{32}{40}\selectfont} % New font for the title
+\newcommand\TitleHUGE{\fontsize{34}{40}\selectfont} % New font for the title
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+\pdfbookmark[0]{Front cover}{front cover} % Bookmark in PDF
 
 \newgeometry{lmargin=3cm, rmargin=3cm, tmargin=4cm, bmargin=3cm} % Sets the margins for the front page
 
@@ -24,15 +26,15 @@
     \vfill
     
     % Author and supervisor
-    \textsc{\LARGE{\Author}}\\\vspace{2em} % Author
-    \textsc{\large{Supervisor: \Supervisor}}\\\bigskip % Supervisor
+    \textsc{\huge{\Author}}\\\vspace{2em} % Author
+    \textsc{\Large{Supervisor: \Supervisor}}\\\bigskip % Supervisor
     
     \vfill
     
     % Description text
     A \MakeLowercase{\Doctype} submitted to\\
     \University\ for the degree of\\
-    \textsc{\Degree}\bigskip\\
+    {\large\textsc{\Degree}\bigskip}\\
     
     % Logos
     \begin{figure}[ht!] % Logo images begin

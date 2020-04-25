@@ -20,19 +20,27 @@
 %%% ESSENTIAL PACKAGES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc} % Essential to keep!
 \usepackage[british]{babel} % Language
-\usepackage{hyperref} % Hyperlinks
-\usepackage{graphicx} % Pictures
-\usepackage{float} % Pictures
-\usepackage{epstopdf} %converting to PDF
+\usepackage[
+    bookmarks=true, % PDF-bookmarks
+    bookmarksnumbered=true, % Numbered PDF-bookmarks
+    bookmarksopen=true, % Bookmarks are opened
+    bookmarksopenlevel=1, % Bookmarks opened but only the chapters
+    bookmarksdepth=2 % Bookmarks include chapters, sections and subsection
+]{hyperref} % Hyperlinks
+\usepackage{graphicx} % Images
+\usepackage{float} % Images
+\usepackage{epstopdf} % Converting EPS files to PDF
+\usepackage{physics} % Physics
+\usepackage{lipsum} % Dummy text
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% FONTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc} % Essential to keep!
 
 % Linux Libertine
 \usepackage{libertine}
@@ -43,15 +51,12 @@
 %%% MARGIN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Default book margins
-% \usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
-
 \ifthenelse{\boolean{book}}{
-    % Margins for only 2400 characters including spaces on one page - book style
+    % Default book margins
     \usepackage[lmargin=142pt,rmargin=95pt,tmargin=127pt,bmargin=123pt]{geometry}
 }{
-    % Margins for only 2400 characters including spaces on one page - article style
-    \usepackage{geometry}
+    % Margins for only 2400 characters including spaces (from lipsum) on one page - article style
+    \usepackage[lmargin=5cm,rmargin=5cm,tmargin=4.75cm,bmargin=3.8cm]{geometry}
 }
 
 
@@ -133,6 +138,9 @@
 % Set font for the chapter entries to serif and bold (addtokomafont is used to add the serif part to the already defined bold entries. setkomafont would have overruled)
 \addtokomafont{chapterentry}{\rmfamily}
 
+% TOC in PDF-bookmarks as a chapter (0)
+% \BeforeTOCHead[toc]{{\pdfbookmark[0]{\contentsname}{toc}}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% CHAPTER STYLE
@@ -170,4 +178,53 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{biblatex}
-\bibliography{bibliography.bib}
+\bibliography{afterText/bibliography.bib} % Placement of the bib file
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% INDEX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{imakeidx}
+\makeindex % Lets one write to the index
+% Uses the command \index{<entry>} and if nested \index{<entry>!<nested entry>}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% References where you don't have to write eg. ''see equation \re{<label>}'' but ''see \cref{<label>}''
+\usepackage[english]{cleveref}
+
+% Define \crefname for small first letter and \Crefname for capital first letter - used \cref{} and \Cref{}. Command goes ''\crefname{<type>}{<singular use>}{<plural use>}''
+
+% Equations
+\crefname{equation}{Eq.}{Eqs.}
+
+% Figures
+\crefname{figure}{Fig.}{Figs.}
+
+% Tables
+\crefname{table}{Table}{Tables}
+
+% Chapters
+\crefname{chapter}{Chapter}{Chapters}
+
+% Sections
+\crefname{section}{Section}{Sections}
+
+% Subsections
+\crefname{subsection}{Section}{Sections}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TABLES AND FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set caption font
+\addtokomafont{caption}{\sffamily} % Sans serif
+
+% Set caption label font
+\setkomafont{captionlabel}{\scshape} % Small caps and sans serif
+% \setkomafont{captionlabel}{\usekomafont{caption}} % For caption labels (eg. ''Figure X.Y'') in the same font as the captions
