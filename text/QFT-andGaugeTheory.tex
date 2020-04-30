@@ -32,9 +32,42 @@ Due to our interest in examining confinement of quarks, which are spin-\half fer
 \end{align}
 
 
+
 \subsection{Local U(1) gauge invariance}
 
 When considering systems one may often also consider their symmetries. Generally a symmetry \index{symmetry} is written as an invariance of the action, and thus of the Lagrangian density, with respect to transformation represented by operators \cite{peskin_introToQFT_1995}.
+
+\begin{align}
+    \psi &\rightarrow U_\alpha \psi = \exp{i\alpha}\psi
+\end{align}
+
+\begin{align}
+\begin{split}
+    \L_D = \psibar (i \gamma^\mu \partial_\mu - m) \psi \rightarrow
+        & \exp{-i\alpha} \psibar (i \gamma^\mu \partial_\mu - m) \exp{i\alpha} \psi \\
+        =& \exp{-i\alpha} \psibar \exp{i\alpha} (i \gamma^\mu [i \partial_\mu \alpha + \partial_\mu] - m) \psi \\
+        =& \L_D - \psibar\gamma^\mu \partial_\mu \alpha \psi
+\end{split}
+\end{align}
+
+Trivially $\commutator{\psi(x^\mu)}{\exp{i\alpha(x^\mu)}} = 0$ since positions commute
+
+$U_\alpha$ unitary thus $U_\alpha\dagger U_\alpha = \id$
+
+\begin{align}
+    D_\mu &= \partial_\mu + iqA_\mu
+\end{align}
+
+$qA_\mu \rightarrow qA_\mu - \partial_\mu\alpha$
+
+\begin{align}
+\begin{split}
+    \psibar (i \gamma^\mu D_\mu - m) \psi \rightarrow
+        & \exp{-i\alpha} \psibar (i \gamma^\mu [\partial_\mu + iqA_\mu - i\partial_\mu\alpha] - m) \exp{i\alpha} \psi \\
+        =& \psibar (i \gamma^\mu [\partial_\mu + i \partial_\mu \alpha + iqA_\mu - i\partial_\mu\alpha] - m) \psi \\
+        =& \psibar (i \gamma^\mu D_\mu - m) \psi
+\end{split}
+\end{align}
 
 
 
