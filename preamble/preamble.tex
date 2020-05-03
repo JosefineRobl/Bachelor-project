@@ -183,13 +183,13 @@
 %%% BIBLIOGRAPHY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Prettier quoting
+% Proper quoting defined by the babel language
 \usepackage{csquotes}
 
 \usepackage[
     backend=biber,
     style=numeric-comp, % Citing [1-3] not [1,2,3]
-    sorting=none, % No sorting of bibliography entries (i.e. numerical order)
+    sorting=none, % No sorting of bibliography entries (i.e. order of appearance in text)
     % dashed=false, % No dash instead of author if the same author on article n and n+1
     maxbibnames=5, % Increase/decrease to include more/fewer authors in the bibliography
     doi=true, % Show DOI number
@@ -261,7 +261,8 @@
 \renewcommand{\L}{\mathcal{L}} % Lagrangian density
 \renewcommand{\H}{\mathcal{H}} % Hamiltonian density
 \newcommand{\psibar}{\overline{\psi}} % Dirac adjoint of field psi
-\newcommand{\half}{\nicefrac{1}{2}} % Nice half frac in text
+\newcommand{\half}{$\nicefrac{1}{2}$\space} % Nice half frac in text
+\newcommand{\halfWOspace}{$\nicefrac{1}{2}$} % Nice half frac in text without space at the end, such that it can be used in a sentence before a dot, comma or ect.
 \newcommand{\id}{\mathds{1}} % For identity 1
 
 % Renewing \exp to contain round parentheses

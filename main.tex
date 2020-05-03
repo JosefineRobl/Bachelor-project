@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Document class is the Koma script book class
-% \documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, bibliography=totoc, index=totoc, DIV=10]{scrbook}
+% \documentclass[paper=a4, fontsize=12pt, twoside, openright, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, bibliography=totoc, DIV=10]{scrbook}
 
 % Document class is the Koma script report class
 \documentclass[paper=a4, fontsize=12pt, titlepage=firstiscover, chapterprefix=true, headings=twolinechapter, headings=big, bibliography=totoc, DIV=10]{scrreprt}
@@ -102,6 +102,9 @@
     \cleardoublepage % Needs to be here if bookmarks shall be used
     \phantomsection
     \pdfbookmark[0]{\indexname}{index} % Bookmark in PDF
+    
+    % Insert index in TOC, since it did not work usind index=totoc in options for scrbook
+    \addcontentsline{toc}{chapter}{\indexname}
     
     % Makes an index of the book
     \printindex

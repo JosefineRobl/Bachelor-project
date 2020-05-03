@@ -10,65 +10,127 @@
 
 
 
+
 \section{Covariant tensor notation}
 
 \ldots
 
 
 
+
 \section{Lagrangian formalism of fields}
 
-In quantum field theory the dynamics of a system is described using the Lagrangian formalism, but instead of considering the Lagrangian itself one consider the \emph{Lagrangian density} \index{Lagrangian density} $\L$, which is a function of one or more fields \emph{fields} \index{field} $\{\psi_i\}$ and their space- and time-derivatives $\{\partial_\mu \psi_i\}$.
+In quantum field theory the dynamics of a system is described using the Lagrangian formalism, but instead of considering the Lagrangian itself one consider the \emph{Lagrangian density}\index{Lagrangian density} $\L$, which is a function of one or more fields \emph{fields}\index{field} $\{\psi_i\}$ and their space- and time-derivatives $\{\partial_\mu \psi_i\}$.
+
+
+\ldots
+
+\begin{align} \label{eq:LagrangianFormalism_ConjugateMomentumField}
+    \pi_i &= \pdv{\L}{\dot{\psi}_i}
+\end{align}
+
+$\dot{\psi}_i = \partial_0\psi_i$
+
+\begin{align} \label{eq:LagrangianFormalism_HamiltonianDensity}
+    \H &= \sum_i \pi_i \dot{\psi}_i - \L
+\end{align}
+
+\begin{align} \label{eq:LagrangianFormalism_Hamiltonian}
+    H &= \int \dd[3]{x} \H
+\end{align}
 
 
 
-\section{The continuum Schwinger model}
+
+\index{Schwinger model!continuum!derivation|(}
+\section{The continuum Schwinger model} \label{Sec:ContinuumSchwingerModel}
+
+% Most of the content of this section can be found in Refs. \cite{peskin_introToQFT_1995,panyella_masterThesis_2019}.
+
+
 
 \subsection{Dirac field}
 
-Due to our interest in examining confinement of quarks, which are spin-\half fermions, we will take as the starting point the most prominent fermionic field, namely the Dirac field. For this field the Lagrangian density \index{Lagrangian density!of Dirac field} is
-\begin{align}
+Due to our interest in examining confinement of quarks, which are spin-\half fermions, we will take as the starting point the most prominent fermionic field, namely the Dirac field. For this field the Lagrangian density\index{Lagrangian density!of Dirac field} is
+\begin{align} \label{eq:DiracLagrangiangDensity}
     \L_D &= \psibar (i \gamma^\mu \partial_\mu - m) \psi \: ,
 \end{align}
+
+
+% Write that we would later look at the constrain to (1+1)d, thus the gamma matrices of these...
 
 
 
 \subsection{Local U(1) gauge invariance}
 
-When considering systems one may often also consider their symmetries. Generally a symmetry \index{symmetry} is written as an invariance of the action, and thus of the Lagrangian density, with respect to transformation represented by operators \cite{peskin_introToQFT_1995}.
-
-\begin{align}
-    \psi &\rightarrow U_\alpha \psi = \exp{i\alpha}\psi
+When considering systems one may often also consider their symmetries. Generally a \emph{symmetry}\index{symmetry} is written as an invariance of the action, and thus of the Lagrangian density, with respect to transformation represented by operators \cite{peskin_introToQFT_1995}. The set of these operators is called the \emph{symmetry group}\index{symmetry!symmetry group} due to the Lagrangian density being invariant under these and their compositions \cite{panyella_masterThesis_2019}. In the following we will consider the unitary gauge U(1)\index{U(1)}\index{symmetry!U(1)|see{U(1)}}, where the name refers to it being the group of unitary $1\times1$ matrices also known complex numbers with modulus $1$ \cite{peskin_introToQFT_1995}. One of these transformations is the phase of a wave function
+\begin{align} \label{eq:GlobalU(1)GaugeInvariance}
+    \psi &\rightarrow U_\alpha \psi = \exp{i\alpha}\psi \: ,
 \end{align}
+with $\alpha$ being a real number. A Lagrangian density being invariant under this transformation is said to be \emph{globally gauge invariant}\index{gauge invariance!global}, thus the wave function's phase will vanish by choosing the correct gauge. Due to $U_\alpha$ being a number and exploiting its unitarity, $U_\alpha\dagger U_\alpha = \id$, it is trivial to show that the Dirac Lagrangian density $\L_D$ is globally U(1) gauge invariant.
 
+In developing quantum field theory one shall not only impose global gauge invariance but instead demand the more strict \emph{local gauge invariance}\index{gauge invariance!local} \cite{griffiths_introToElementaryParticles_2008}. For the transformation in \cref{eq:GlobalU(1)GaugeInvariance} this implies, that the parameter $\alpha$ shall be spacetime-dependent, $\alpha(x^\mu)$. As for most systems, the Dirac Lagrangian density is not locally invariant as it is, thus introduction of new fields for the system to interact with is required \cite{panyella_masterThesis_2019}. As it happens, the requirement of local gauge invariance supplied a systematic way for determining the equations describing the fundamental interactions: The electromagnetic interaction requires -- as we will derive later in this section -- local U(1) invariance, the electroweak interaction requires local SU(2)$\otimes$U(1) invariance\footnote{SU(N)\index{symmetry!SU(N)} being the the group of all unitary $N \times N$ matrices with determinant $1$ \cite{peskin_introToQFT_1995}.}, and the strong nuclear interaction requires local SU(3) invariance \cite{standford_QFT, griffiths_introToElementaryParticles_2008}, thus the Standard Model of elementary particle physics is a gauge theory resulting from demanding local U(1)$\otimes$SU(2)$\otimes$SU(3) symmetry \cite{standford_historyOfQFT}.
+
+In the following it will be shown, that the Dirac Lagrangian density, \cref{eq:DiracLagrangiangDensity}, is not locally U(1) invariant, but it will lay the foundation for deriving one that is. The derivation will follow that of Refs. \cite{peskin_introToQFT_1995, griffiths_introToElementaryParticles_2008, panyella_masterThesis_2019}. To lighten the the notation, the parameter $\alpha(x^\mu)$ will be denoted $\alpha$ for the rest of this section. From \cref{eq:GlobalU(1)GaugeInvariance} the conjugated field must transform as
 \begin{align}
+    \psibar &\rightarrow \gamma^0 \overline{\psi'}
+        = \gamma^0 [U_\alpha \psi]\dagger
+        = \gamma^0\psi\dagger U_\alpha\dagger
+        = \psibar\exp{-i\alpha} \: ,
+\end{align}
+for $\psi'$ being the U(1) transformed field, $\psi' = U_\alpha \psi$. Thus Dirac's Lagrangian density will transform as
+\begin{align} \label{eq:DiracLagrangianDensityLackLocalU(1)Symmetry}
 \begin{split}
     \L_D = \psibar (i \gamma^\mu \partial_\mu - m) \psi \rightarrow
-        & \exp{-i\alpha} \psibar (i \gamma^\mu \partial_\mu - m) \exp{i\alpha} \psi \\
-        =& \exp{-i\alpha} \psibar \exp{i\alpha} (i \gamma^\mu [i \partial_\mu \alpha + \partial_\mu] - m) \psi \\
+        & \psibar \exp{-i\alpha} (i \gamma^\mu \partial_\mu - m) \exp{i\alpha} \psi \\
+        =& \psibar \exp{-i\alpha} \exp{i\alpha} (i \gamma^\mu [i \partial_\mu \alpha + \partial_\mu] - m) \psi \\
         =& \L_D - \psibar\gamma^\mu \partial_\mu \alpha \psi
 \end{split}
 \end{align}
-
-Trivially $\commutator{\psi(x^\mu)}{\exp{i\alpha(x^\mu)}} = 0$ since positions commute
-
-$U_\alpha$ unitary thus $U_\alpha\dagger U_\alpha = \id$
-
-\begin{align}
-    D_\mu &= \partial_\mu + iqA_\mu
+exploiting again the unitarity of the U(1) symmetry group, $U_\alpha\dagger U_\alpha = \id$. From \cref{eq:DiracLagrangianDensityLackLocalU(1)Symmetry} it can be seen, that the differential operator is to blame for the lack of local gauge invariance. Thus one must introduce the \emph{gauge covariant derivative}\index{gauge covariant derivative}
+\begin{align} \label{eq:GaugeCovariantDerivative}
+    D_\mu &= \partial_\mu + iqA_\mu \: ,
 \end{align}
-
-$qA_\mu \rightarrow qA_\mu - \partial_\mu\alpha$
-
+which will replace the original derivative. In \cref{eq:GaugeCovariantDerivative} $A_\mu$\index{Amu@$A_\mu$} is a vector field which under U(1) symmetry transforms as
+\begin{align}
+    qA_\mu &\rightarrow qA_\mu - \partial_\mu\alpha \: ,
+\end{align}
+for $q$ being a real number. Using this new gauge covariant derivative, the Lagrangian density becomes locally U(1) gauge invariant:
 \begin{align}
 \begin{split}
     \psibar (i \gamma^\mu D_\mu - m) \psi \rightarrow
-        & \exp{-i\alpha} \psibar (i \gamma^\mu [\partial_\mu + iqA_\mu - i\partial_\mu\alpha] - m) \exp{i\alpha} \psi \\
+        & \psibar \exp{-i\alpha} (i \gamma^\mu [\partial_\mu + iqA_\mu - i\partial_\mu\alpha] - m) \exp{i\alpha} \psi \\
         =& \psibar (i \gamma^\mu [\partial_\mu + i \partial_\mu \alpha + iqA_\mu - i\partial_\mu\alpha] - m) \psi \\
-        =& \psibar (i \gamma^\mu D_\mu - m) \psi
+        =& \psibar (i \gamma^\mu D_\mu - m) \psi \: .
 \end{split}
 \end{align}
+However, there is still one important addition to the Lagrangian density, which we have still not accounted for: For the newly introduced vector field we have only introduced its coupling to the already existing field, $\psi$, but we also need to include its own ''free'' term, i.e. its kinetic energy term. The usual form of the kinetic energy is to be a scalar and the square of the derivative of the field, thus we set these as the requirements of $A_\mu$'s kinetic energy. Thus we propose the term $F_{\mu\nu}F^{\mu\nu}$,
+\begin{align}
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu \: ,
+\end{align}
+being the \emph{gauge field tensor}\index{gauge field tensor}\index{Fmunu@$F_{\mu\nu}$|see{gauge field tensor}} \cite{griffiths_introToEldyn_2017}. Since the gauge field tensor transforms as
+\begin{align}
+    F_{\mu\nu} \rightarrow F_{\mu\nu} - \partial_\mu A_\nu \alpha + \partial_\nu A_\mu \alpha \: ,
+\end{align}
+it is gauge invariant, assuming that $\alpha$ is well-behaved such that the order of the derivatives is irrelevant, $\partial_\mu\partial_\nu\alpha = \partial_\nu\partial_\mu\alpha$, thus they will cancel each other.
 
+Combining the above results in the locally U(1) gauge invariant Lagrangian density
+\begin{align} \label{eq:ContinuumSchwingerModelLagrangianDensity}
+    \L &= \psibar (i \gamma^\mu D_\mu - m) \psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} \: ,
+\end{align}
+where the factor of $-\nicefrac{1}{4}$ is due to convention. This is the Lagrangian density of \emph{quantum electrodynamics}\index{Lagrangian density!of quantum electrodynamics}, and for (1+1)D it is known as the Lagrangian density of the \emph{continuum Schwinger model}\index{Schwinger model!continuum}\index{Lagrangian density!Schwinger model!continuum} \cite{Melnikov_LatticeSchwingerModel_2000}.
+
+
+
+\subsection{Hamiltonian density}
+
+In this section the arguments will follow Ref. \cite{Melnikov_LatticeSchwingerModel_2000}
+
+From \cref{eq:ContinuumSchwingerModelLagrangianDensity} the continuum Schwinger model Hamiltonian density can be found using \cref{eq:LagrangianFormalism_ConjugateMomentumField,eq:LagrangianFormalism_HamiltonianDensity,eq:LagrangianFormalism_Hamiltonian}.
+
+
+
+\index{Schwinger model!continuum!derivation|)}
 
 
 
