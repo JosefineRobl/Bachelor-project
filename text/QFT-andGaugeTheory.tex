@@ -73,8 +73,8 @@ In developing quantum field theory one shall not only impose global gauge invari
 
 In the following it will be shown, that the Dirac Lagrangian density, \cref{eq:DiracLagrangiangDensity}, is not locally U(1) invariant, but it will lay the foundation for deriving one that is. The derivation will follow that of Refs. \cite{peskin_introToQFT_1995, griffiths_introToElementaryParticles_2008, panyella_masterThesis_2019}. To lighten the the notation, the parameter $\alpha(x^\mu)$ will be denoted $\alpha$ for the rest of this section. From \cref{eq:GlobalU(1)GaugeInvariance} the conjugated field must transform as
 \begin{align}
-    \psibar &\rightarrow \gamma^0 \overline{\psi'}
-        = \gamma^0 [U_\alpha \psi]\dagger
+    \psibar &\rightarrow \gamma^0 (\psi')\dagger
+        = \gamma^0 (U_\alpha \psi)\dagger
         = \gamma^0\psi\dagger U_\alpha\dagger
         = \psibar\exp{-i\alpha} \: ,
 \end{align}
@@ -118,18 +118,41 @@ Combining the above results in the locally U(1) gauge invariant Lagrangian densi
 \begin{align} \label{eq:ContinuumSchwingerModelLagrangianDensity}
     \L &= \psibar (i \gamma^\mu D_\mu - m) \psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} \: ,
 \end{align}
-where the factor of $-\nicefrac{1}{4}$ is due to convention. This is the Lagrangian density of \emph{quantum electrodynamics}\index{Lagrangian density!of quantum electrodynamics}, and for (1+1)D it is known as the Lagrangian density of the \emph{continuum Schwinger model}\index{Schwinger model!continuum}\index{Lagrangian density!Schwinger model!continuum} \cite{Melnikov_LatticeSchwingerModel_2000}.
+where the factor of $-\nicefrac{1}{4}$ is due to convention. This is the Lagrangian density of \emph{quantum electrodynamics}\index{Lagrangian density!of quantum electrodynamics}, and for (1+1)D it is known as the Lagrangian density of the \emph{continuum Schwinger model}\index{Schwinger model!continuum}\index{Lagrangian density!Schwinger model!continuum} \cite{melnikov_latticeSchwingerModel_2000}.
 
 
 
 \subsection{Hamiltonian density}
 
-In this section the arguments will follow Ref. \cite{Melnikov_LatticeSchwingerModel_2000}
+In this section the arguments will mostly follow that of Ref. \cite{melnikov_latticeSchwingerModel_2000}. We choose make the common gauge restriction to work in the temporal gauge, thus the temporal part of the the vector field $A_\mu$ is zero, $A_0 = 0$. From this choice of gauge and that of working in (1+1)-dimensions, i.e. $\mu,\nu = 0,1$, one can reduce \cref{eq:ContinuumSchwingerModelLagrangianDensity} to
+\begin{align} \label{eq:ContinuumSchwingerModelLagrangianDensityAfterA0=0}
+    \L &= \psibar (i \gamma^\mu \partial_\mu - \gamma^1 q A_1 - m) \psi + \frac{1}{2}E_1E^1 \: ,
+\end{align}
+where $E_1 = \partial_0 A_1$ is the electric field in the direction of $x_1$. Computing the last term of \cref{eq:ContinuumSchwingerModelLagrangianDensityAfterA0=0} requires one to remember, that the gauge field tensor is an antisymmetric tensor, $F_{\mu\nu} = - F_{\nu\mu}$, and that a contravariant tensor can be found by flipping the sign on the entries in the covariant tensor, for which the index is $0$, $F^{0\nu} = -F_{0\nu}$, \cite{griffiths_introToEldyn_2017}, thus
+\begin{align}
+\begin{split}
+    F_{\mu\nu}F^{\mu\nu} &= F_{00}F^{00} + F_{01}F^{01} + F_{10}F^{10} + F_{11}F^{11}     = F_{01}F^{01} + F_{10}F^{10} \\
+        &= 2F_{01}F^{01}
+        = -2F_{01}^2
+        = -2(\partial_0A_1 - \partial_1A_0)^2
+        = -2(\partial_0A_1)^2 \: ,
+\end{split}
+\end{align}
+for $\mu,\nu = 0,1$.
 
-From \cref{eq:ContinuumSchwingerModelLagrangianDensity} the continuum Schwinger model Hamiltonian density can be found using \cref{eq:LagrangianFormalism_ConjugateMomentumField,eq:LagrangianFormalism_HamiltonianDensity,eq:LagrangianFormalism_Hamiltonian}.
-
-
-
+The continuum Schwinger model Hamiltonian density can now be found using \cref{eq:LagrangianFormalism_ConjugateMomentumField,eq:LagrangianFormalism_HamiltonianDensity,eq:LagrangianFormalism_Hamiltonian} on \cref{eq:ContinuumSchwingerModelLagrangianDensityAfterA0=0}. The Hamiltonian density\index{Schwinger model!continuum}\index{Hamiltonian density!Schwinger model!continuum} therefor becomes
+\begin{align} \label{eq:ContinuumSchwingerModelHamiltonianDensity}
+\begin{split}
+    \H &= \pdv{\L}{(\partial_0 A_1)} \partial_0 A_1 + \pdv{\L}{(\partial_0 \psi)} \partial_0 \psi - \L \\
+        &= \partial^0 A^1 \partial_0 A_1 + \psibar i \gamma^0 \partial_0 \psi - \psibar (i \gamma^\mu \partial_\mu - \gamma^1 q A_1 - m) \psi - \frac{1}{2} E_1 E^1 \\
+        &= E^1 E_1 + \psibar i \gamma^0 \partial_0 \psi - \psibar i \gamma^0 \partial_0 \psi - \psibar (i \gamma^1 \partial_1 - \gamma^1 q A_1 - m) \psi - \frac{1}{2} E_1 E^1 \\
+        &= - \psibar (i \gamma^1 D_1 - m) \psi + \frac{1}{2} E_1 E^1 \: ,
+\end{split}
+\end{align}
+and thus we get the Hamiltonian as the spatial integral of the above density
+\begin{align}
+    H &= \int \dd{x} \left[ - \psibar (i \gamma^1 D_1 - m) \psi + \frac{1}{2} E_1 E^1 \right] \: .
+\end{align}
 \index{Schwinger model!continuum!derivation|)}
 
 
