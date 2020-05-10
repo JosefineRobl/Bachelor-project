@@ -4,62 +4,117 @@
 
 \begin{document}
 
-\chapter{Quantum field theory on a lattice} \label{chap:LatticeQFT}
+\chapter{Quantum Field Theory on a Lattice} \label{chap:LatticeQFT}
 
 \ldots
+
+As in \cref{sec:ContinuumSchwingerModelHamiltonianDensity} we will in this chapter only be concerned with (1+1)-dimensions, since our main goal is to derive the lattice Schwinger model.
 
 
 
 
 \section{Discretization}
 
+In this section
+
+\begin{align}
+    x \rightarrow x_n &= an
+\end{align}
+
+$\psi_n = \psi(x_n)$
+
+\begin{align}
+    \int \dd{x} &\rightarrow a \sum_n
+\end{align}
+
+\begin{align}
+    \partial_0 A &\rightarrow \frac{A_n - A_{n-\hat{1}}}{a}
+\end{align}
+
+\begin{align}
+    \partial_1 \psi &\rightarrow \frac{\psi_{n+\hat{1}} - \psi_{n-\hat{1}}}{2a}
+\end{align}
+
+
+
+
 \ldots
 
-
-
-
-\section{Lattice Schwinger model}
-
-\ldots
-
+\index{Hamiltonian!of Schwinger model!lattice}\index{Schwinger model!lattice}
+\begin{align} \label{eq:LatticeSchwingerModelHamiltonian}
+    LatticeSchwingerModel
+\end{align}
 
 
 
 % \section{Equivalent spin formalism of the lattice Schwinger model}
-\subsection{Mapping to spin system}
+\section{Mapping to spin system}
 
-\ldots
+In the previous section we have gone through the derivation of the lattice Scwhinger model, \cref{eq:LatticeSchwingerModelHamiltonian}, from the continuum Schwinger model. This discretization allows us to simulate a system using the lattice Schwinger model Hamiltonian, since computers are not able to process continuous variables but need discretized versions of them. In the following we will provided yet another step in the process of making the Hamiltonian easier computable by introducing transformations mapping the operators to that of spin systems. This will be done in two steps: Firstly the matter fields are transformed using the Jordan-Wigner transformation\index{Jordan-Wigner transformation}, and secondly the gauge fields are transformed using quantum link models\index{quantum link model}.
 
 
 
-\subsubsection{Jordan-Wigner transformation}
+\index{Jordan-Wigner transformation|(}
+\subsection{Jordan-Wigner transformation}
 
-The Jordan-Wigner transformation is a transformation mapping fermionic creation and annihilation operators onto spin operators of the spin-\half system for one-dimensional lattices, thus we will use this to transform the fermions on the matters sites to spin step operators. This section will take its starting point in Refs. \cite{jordan-wigner_1928, banksSusskindKogut_StrongCopling_1976, panyella_masterThesis_2019}.
+The \emph{Jordan-Wigner transformation} is a transformation mapping fermionic creation and annihilation operators onto spin operators of the spin-\half system for one-dimensional lattices, thus we will use this to transform the fermions on the matters sites to spin step operators. This section will take its starting point in Refs. \cite{jordan-wigner_1928, banksSusskindKogut_StrongCopling_1976, panyella_masterThesis_2019}.
 
 Remembering the definition of the step spin operators \cite{sakurai_modernQM_2017}
+\index{sigmaplus@$\sigma^+$|(}
+\index{sigmaminus@$\sigma^-$|(}
 \begin{align}
     \sigma^\pm &= \frac{\sigma_x \pm i \sigma_y}{2} \: ,
 \end{align}
-one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
+\index{sigmaminus@$\sigma^-$|)}
+\index{sigmaplus@$\sigma^+$|)}
+one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice site, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
 
-To accommodate the above stated problem we introduce the Jordan-Wigner transformation
+To accommodate the above stated problem we introduce the Jordan-Wigner transformation\index{Jordan-Wigner transformation}
 \begin{align} \label{eq:Jordan-WignerTransformation}
 \begin{split}
     \psi_n &= \prod_{m=0}^{n-1} (i\sigma_m^z) \sigma_n^- \: , \\
     \psi_n\dagger &= \prod_{m=0}^{n-1} (-i\sigma_m^z) \sigma_n^+ \: .
 \end{split}
 \end{align}
-for which the added product part corresponds to all the lattice sites from one end of the lattice to the site concerned, thus ensuring the anticommutator, that the previous stated (direct) transformation did not satisfy. It can fairly easy be shown, that the Jordan-Wigner transformation ensures the correct anticommutator
-\begin{align}
-    \anticommutator{\psi_n}{\psi_m} &= (-1)^n i \anticommutator{\sigma_n^-}{\sigma_n^z} \prod_{l=n+1}^{m-1} (i \sigma_l^z) \sigma_m^- = 0 \: ,
-\end{align}
-by splitting the product parts\footnote{The product parts shall be split into into three parts: $[0,\ldots,n-1]$, $n$ and $[n+1,\ldots,m-1]$} and using $\anticommutator{\sigma_n^\pm}{\sigma_n^z} = 0$ and $\commutator{\sigma_n^\pm}{\sigma_m^z}$ (the operators only operate on their designated lattice site, thus operators with $n \ne m$ won't interfere with each other), while the transformation still preserves the anticommutator $\anticommutator{\psi_n\dagger}{\psi_n} = \anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, due to the added product part cancelling with itself.
+for which the added product part corresponds to all the lattice sites from one end of the lattice to the site concerned, thus ensuring the anticommutator, that the previous stated (direct) transformation did not satisfy. It can fairly easy be shown, that the Jordan-Wigner transformation ensures the correct anticommutators for $n \ne m$
+\begin{subequations} % Letting all the anticommutators be subequations
+\begin{align} % First part of the anticommutators
+    \anticommutator{\psi_n}{\psi_m} &= (-1)^n i \anticommutator{\sigma_n^-}{\sigma_n^z} \prod_{l=n+1}^{m-1} (i \sigma_l^z) \sigma_m^- = 0 \: , \\
+    %
+    \anticommutator{\psi_n\dagger}{\psi_m\dagger} &= (-1)^n i \anticommutator{\sigma_n^+}{\sigma_n^z} \prod_{l=n+1}^{m-1} (-i \sigma_l^z) \sigma_m^+ = 0 \: , \quad \text{and} \\
+    %
+    \anticommutator{\psi_n\dagger}{\psi_m} &= i \anticommutator{\sigma_n^+}{\sigma_n^z} \prod_{l=n+1}^{m-1} (i \sigma_l^z) \sigma_m^- = 0 \: ,
+\end{align} % End first part of the anticommutators
+by splitting the product parts\footnote{The product parts shall be split into into three parts: $[0,\ldots,n-1]$, $n$ and $[n+1,\ldots,m-1]$.} and using the anticommutators $\anticommutator{\sigma_n^\pm}{\sigma_n^z} = 0$ and $\anticommutator{\sigma_n^\pm}{\sigma_m^z} = 0$, while the transformation still preserves the anticommutator
+\begin{align} % Second part of the anticommutators
+    \anticommutator{\psi_n\dagger}{\psi_n} &= \anticommutator{\sigma_n^+}{\sigma_n^-} = 1 ,
+\end{align} % End second part of the anticommutators
+\end{subequations} % Letting all the anticommutators be subequations
+due to the added product part in this case cancels with itself. Due to the possibility of inverting the Jordan-Wigner transformation \cite{jordan-wigner_1928} the two formulations -- the spin formulation and the creation and annihilation operator formalism -- are equivalent, thus exactly the same information is contained in the system in both formalisms \cite{panyella_masterThesis_2019}.
+\index{Jordan-Wigner transformation|)}
 
 
 
-\subsubsection{Quantum Link Models}
+\index{quantum link model|(}
+\subsection{Quantum Link Models}
 
 \ldots
+
+
+\index{quantum link model|)}
+
+
+
+
+\subsection{Spin model of the lattice Schwinger model}
+
+\ldots
+
+\index{Hamiltonian!of Schwinger model!lattice!spin formulation}
+\begin{align} \label{eq:LatticeSchwingerModelHamiltonianSpin}
+    LatticeSchwingerModelSpin
+\end{align}
+\index{Schwinger model!lattice!spin formulation}
 
 
 

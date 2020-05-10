@@ -17,7 +17,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% ESSENTIAL PACKAGES
+%%% PACKAGES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[utf8]{inputenc} % Essential to keep!
@@ -34,6 +34,7 @@
 \usepackage{epstopdf} % Converting EPS files to PDF
 \usepackage{physics} % Physics
 \usepackage{nicefrac} % Nice in text fractions
+\usepackage{tikz} % Drawing
 \usepackage{lipsum} % Dummy text
 
 
@@ -191,11 +192,12 @@
     style=numeric-comp, % Citing [1-3] not [1,2,3]
     sorting=none, % No sorting of bibliography entries (i.e. order of appearance in text)
     % dashed=false, % No dash instead of author if the same author on article n and n+1
-    maxbibnames=5, % Increase/decrease to include more/fewer authors in the bibliography
+    maxbibnames=3, % Increase/decrease to include more/fewer authors in the bibliography
     doi=true, % Show DOI number
     url=true, % Show URL
     isbn=true, % Show ISBN
     hyperref=true, % Citations in text works as links
+    urldate=comp, % Date visited shown as <#day>th <month> <#year> instead of <#date>/<#month>/<#year>
 ]{biblatex}
 
 % Space in bibliography (change to compress/expand bibliography)
