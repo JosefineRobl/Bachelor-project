@@ -29,12 +29,8 @@
     bookmarksopenlevel=1, % Bookmarks opened but only the chapters
     bookmarksdepth=2 % Bookmarks include chapters, sections and subsection
 ]{hyperref} % Hyperlinks
-\usepackage{graphicx} % Images
-\usepackage{float} % Images
-\usepackage{epstopdf} % Converting EPS files to PDF
 \usepackage{physics} % Physics
 \usepackage{nicefrac} % Nice in text fractions
-\usepackage{tikz} % Drawing
 \usepackage{lipsum} % Dummy text
 
 
@@ -212,7 +208,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{imakeidx}
-\makeindex % Lets one write to the index
+\makeindex[
+    % columns = 2, % Number of columns (2 is default)
+    % title = Index,
+    options = -s preamble/indexPreamble.ist, % Each section in the index will be accompanied by their first letter (capital) in boldface
+    intoc, % Index in TOC
+] % Lets one write to the index
 % Uses the command \index{<entry>} and if nested \index{<entry>!<nested entry>}
 
 
@@ -248,8 +249,16 @@
 %%% TABLES AND FIGURES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Packages
+\usepackage{graphicx} % Images
+\usepackage{float} % Images
+\usepackage{epstopdf} % Converting EPS files to PDF
+\usepackage{tikz} % Drawing
+\usetikzlibrary{positioning} % For relative positioning of nodes
+\usepackage[format=plain]{caption} % For no indent of caption text to fit end of caption name
+
 % Set caption font
-\addtokomafont{caption}{\sffamily} % Sans serif
+\addtokomafont{caption}{\sffamily\small} % Sans serif and smaller text
 
 % Set caption label font
 \setkomafont{captionlabel}{\scshape} % Small caps and sans serif

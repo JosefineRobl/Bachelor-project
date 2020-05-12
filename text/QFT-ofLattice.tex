@@ -7,6 +7,7 @@
 \chapter{Quantum Field Theory on a Lattice} \label{chap:LatticeQFT}
 
 \ldots
+\lipsum[1-4]
 
 As in \cref{sec:ContinuumSchwingerModelHamiltonianDensity} we will in this chapter only be concerned with (1+1)-dimensions, since our main goal is to derive the lattice Schwinger model.
 
@@ -15,28 +16,69 @@ As in \cref{sec:ContinuumSchwingerModelHamiltonianDensity} we will in this chapt
 
 \section{Discretization}
 
-In this section
-
+In this section we will be discretizing the continuum Schwinger model Hamiltonian, \cref{eq:ContinuumSchwingerModelHamiltonian}. We chose to only discretize space while keeping the time continuous, thus the discretization will follow Refs. \cite{sriganish_PhD_LatticeSchwingerModel_2001, smit_introToQuantumFieldsOnALattice_2003}. The discretization of the space accomplished by considering the space as an infinite lattice, where the matter is restricted to only live on the lattice sites, thus the spacial coordinates are discretized as
 \begin{align}
-    x \rightarrow x_n &= an
+    x \rightarrow x_n &= an \: ,
 \end{align}
-
-$\psi_n = \psi(x_n)$
-
+where $a$ is the lattice spacing and $n$ the lattice site number. Thus the matter field at the $n$'th lattice site will be denoted $\psi_n = \psi(x_n)$. Integration over space will be replaced by a sum,
 \begin{align}
-    \int \dd{x} &\rightarrow a \sum_n
+    \int \dd{x} &\rightarrow a \sum_n \: ,
 \end{align}
+with the lattice spacing multiplied for the correct spacing between the matter sites.
 
-\begin{align}
-    \partial_0 A &\rightarrow \frac{A_n - A_{n-\hat{1}}}{a}
-\end{align}
+When discretizing the spatial derivative, one might propose the derivative to be the the difference in the field at two nearby sites divided by the lattice spacing, $\partial_1 f(x) \rightarrow (f_n - f_{n + \hat{1}}) / a$, but this turns out to cause difficulties, namely the \emph{lattice fermion doubling}\index{fermion doubling}\index{lattice fermion doubling|see{fermion doubling}}
+\cite{GoswamiBandyopadhyay_FermionDoubling_1997}
+
+%%%%%
+
+Impose \emph{staggered fermions}\index{staggered fermions} also known as Kogut-Susskind fermions\index{Kugor-Susskind fermions|see{staggered fermions}} \cite{susskind_latticeFermions_1977, banksSusskindKogut_StrongCoupling_1976}
 
 \begin{align}
     \partial_1 \psi &\rightarrow \frac{\psi_{n+\hat{1}} - \psi_{n-\hat{1}}}{2a}
 \end{align}
 
+%%%%%
 
+\begin{figure}[t]
+    \centering
+    \begin{tikzpicture}[
+        % Definition of node styles
+        particle/.style={circle, fill=red!100, very thick, minimum size=2mm},
+        antiparticle/.style={circle, fill=blue!100, very thick, minimum size=2mm},
+        node distance = 2.5cm,
+        ]
+        %
+        % Nodes
+        \node[antiparticle]     (firstParticle) {};
+        \node[particle]         (firstAntiparticle)     [right=of firstParticle] {};
+        \node[antiparticle]     (secondParticle)        [right=of firstAntiparticle] {};
+        \node[particle]         (secondAntiparticle)    [right=of secondParticle] {};
+        %
+        % Links
+        \draw[dashed] (firstParticle.east) -- (firstAntiparticle.west);
+        \draw[dashed] (firstAntiparticle.east) --  node[above=0.3cm, midway, black] {\Large $E_n$,\: $A_n$} (secondParticle.west);
+        \draw[dashed] (secondParticle.east) --  node[above=0.45em, midway, black] {\Large $E_{n+\hat{1}}$,\: $A_{n+\hat{1}}$} (secondAntiparticle.west);
+        %
+        % Naming of links with ellipses
+        % \draw[very thick,black!30!green] (4.4,0) ellipse (1.25 and 0.2) node[above=0.2cm,black] {\Large $E_n$};
+        % \draw[very thick,black!30!green] (7.35,0) ellipse (1.25 and 0.2) node[above=0.2cm,black] {\Large $E_{n+\hat{1}}$};
+        %
+        % Naming of particles
+        \draw[thick,->] (2.45,-0.75) node[anchor=north, text width=1.5cm, align=center] {\Large{$\psi_n$} \large{particle}} -- (2.75,-0.3);
+        \draw[thick,->] (5.4,-0.7) node[anchor=north, text width=2.5cm, align=center] {\Large{$\psi_{n+\hat{1}}$} \large{antiparticle}} -- (5.7,-0.3);
+        %
+        % Coordinate system axis (split into two to keep \hat{1} centred)
+        \draw[thick,->] (0,-2.5) -- node[below, midway] {\large $\hat{1}$} (2.5,-2.5);
+    \end{tikzpicture}
+    \caption{Segment of a one-dimensional lattice. Here $n$ is even, thus the red and blue matter sites are the matter fields of a particle and an antiparticle respectively, and the gauge fields linking the two nearby matter sites are indicated by dashed lines. Inspired by Ref. \cite[Fig.~4.1]{panyella_masterThesis_2019}.}
+    \label{fig:StaggeredFermionsOnALattice}
+\end{figure}
 
+%%%%%
+
+\begin{align}
+    H &= \int \dd{x} \left[ - \psibar (i \gamma^1 D_1 - m) \psi + \frac{1}{2} E_1 E^1 \right]
+\end{align}
 
 \ldots
 
@@ -57,7 +99,7 @@ In the previous section we have gone through the derivation of the lattice Scwhi
 \index{Jordan-Wigner transformation|(}
 \subsection{Jordan-Wigner transformation}
 
-The \emph{Jordan-Wigner transformation} is a transformation mapping fermionic creation and annihilation operators onto spin operators of the spin-\half system for one-dimensional lattices, thus we will use this to transform the fermions on the matters sites to spin step operators. This section will take its starting point in Refs. \cite{jordan-wigner_1928, banksSusskindKogut_StrongCopling_1976, panyella_masterThesis_2019}.
+The \emph{Jordan-Wigner transformation} is a transformation mapping fermionic creation and annihilation operators onto spin operators of the spin-\half system for one-dimensional lattices, thus we will use this to transform the fermions on the matters sites to spin step operators. This section will take its starting point in Refs. \cite{jordan-wigner_1928, banksSusskindKogut_StrongCoupling_1976, panyella_masterThesis_2019}.
 
 Remembering the definition of the step spin operators \cite{sakurai_modernQM_2017}
 \index{sigmaplus@$\sigma^+$|(}
@@ -100,6 +142,10 @@ due to the added product part in this case cancels with itself. Due to the possi
 
 \ldots
 
+\begin{align} \label{eq:QuantumLinkModel}
+    ...
+\end{align}
+
 
 \index{quantum link model|)}
 
@@ -108,13 +154,20 @@ due to the added product part in this case cancels with itself. Due to the possi
 
 \subsection{Spin model of the lattice Schwinger model}
 
-\ldots
-
-\index{Hamiltonian!of Schwinger model!lattice!spin formulation}
+Equipped with the tools of transforming matter fields and gauge fields to be dependent of the spin operators, we can now remodel the Hamiltonian of the lattice Schwinger model in terms of spin. Substituting the operators of \cref{eq:LatticeSchwingerModelHamiltonian} according to \cref{eq:Jordan-WignerTransformation,eq:QuantumLinkModel} results in the Hamiltonian
+\index{Hamiltonian!of Schwinger model!lattice!spin formulation|(}
+\index{Schwinger model!lattice!spin formulation|(}
 \begin{align} \label{eq:LatticeSchwingerModelHamiltonianSpin}
     LatticeSchwingerModelSpin
 \end{align}
-\index{Schwinger model!lattice!spin formulation}
+\index{Schwinger model!lattice!spin formulation|)}
+\index{Hamiltonian!of Schwinger model!lattice!spin formulation|)}
+
+
+
+
+
+\printbibliography
 
 
 

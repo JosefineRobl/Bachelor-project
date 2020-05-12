@@ -7,6 +7,7 @@
 \chapter{Quantum Field Theory and Gauge~Theory} \label{chap:ContinuumQFT}
 
 \ldots
+\lipsum[1-4]
 
 
 
@@ -23,11 +24,11 @@ One might notice, that the indices in \cref{eq:EinsteinSummation} is placed eith
 \begin{align} \label{eq:CovariantFromContravariant}
     a_\mu &= g_{\mu\nu}a^\nu = (a_0,\, -\Vec{a}) \: ,
 \end{align}
-where the last equality in \cref{eq:CovariantFromContravariant} is due to our choise of the rank 2 metric tensor of spacetime to be the Minkowski metric tensor, $g_{\mu\nu} = \text{Diag}(1,\, -1,\, -1,\, -1)$, since we will be working in a flat space-time.
+where the last equality in \cref{eq:CovariantFromContravariant} is due to our choise of the rank 2 metric tensor of spacetime to be the Minkowski metric tensor, $g_{\mu\nu} = \text{Diag}(1,\, -1,\, -1,\, -1)$ \footnote{This being the notation of a matrix with the diagonal $1,\, -1,\, -1,\, -1$ and $0$ elsewhere.}, since we will be working in a flat space-time.
 
-Some important four-vectors that will be used later on is the space-time coordinate vector $x^\mu = (t, \Vec{x})$, which is contravariant, and the covariant derivative\index{covariant derivative}
+Some important four-vectors that will be used later on is the space-time coordinate vector $x^\mu = (x_0,\, \Vec{x}) = (t,\, \Vec{x})$, which is contravariant, and the covariant derivative\index{covariant derivative}
 \begin{align}
-    \partial_\mu &= \pdv{}{x^\mu} = \left(\pdv{}{x^0},\, \Vec{\nabla}\right) = \left(\partial_t,\, \Vec{\nabla}\right) \: .
+    \partial_\mu &= \pdv{}{x^\mu} = \left(\pdv{}{x^0},\, \Vec{\nabla}\right) = \left(\pdv{}{t},\, \Vec{\nabla}\right) = \left(\partial_0,\, \Vec{\nabla}\right)  \: .
 \end{align}
 Note that even thought the derivative is covariant, we are actually differentiating with respect to the contravariant space-time coordinate vector.
 
@@ -84,7 +85,7 @@ Due to our interest in examining confinement of quarks, which are spin-\half fer
 \begin{align} \label{eq:DiracLagrangiangDensity}
     \L_D &= \psibar (i \gamma^\mu \partial_\mu - m) \psi \: ,
 \end{align}
-where $\psibar = \gamma^0 \psi\dagger$, $\psi$ is a \emph{Dirac spinor}\index{spinor}\index{spinor!Dirac}\index{Dirac spinor|see{spinor, Dirac}}, and $\gamma^\mu$ are the gamma- or \emph{Dirac-matrices}\index{Dirac matrices}\index{gamma-matrices|see{Dirac-matrices}} \cite{peskin_introToQFT_1995,sakurai_modernQM_2017}. For the following descriptions of the above mentioned elements Ref. \cite{peskin_introToQFT_1995} will be laying the foundation. The Dirac spinor $\psi$\index{Spinor!Dirac} is a four component spinor, with each entry being complex. The upper two entries of $\psi$ corresponds to a particle, while the bottom two corresponds to an antiparticle, and for each of these pairs, the top and bottom entries represent the two possible spin states of the spin-\half particle or antiparticle. Now to defining the Dirac-matrices $\gamma^\mu = (\gamma^0,\, \gamma^i)$ for $i=1,2,3$. These matrices are $4 \times 4$ constant matrices that satisfy the Clifford algebra, thus the anticommutator
+where $\psibar = \gamma^0 \psi\dagger$, $m$ is the mass of the fermion, $\psi$ is a \emph{Dirac spinor}\index{spinor}\index{spinor!Dirac}\index{Dirac spinor|see{spinor, Dirac}}, and $\gamma^\mu$ are the gamma- or \emph{Dirac-matrices}\index{Dirac matrices}\index{gamma-matrices|see{Dirac-matrices}} \cite{peskin_introToQFT_1995,sakurai_modernQM_2017}. For the following descriptions of the above mentioned elements Ref. \cite{peskin_introToQFT_1995} will be laying the foundation. The Dirac spinor $\psi$\index{Spinor!Dirac} is a four component spinor, with each entry being complex. The upper two entries of $\psi$ corresponds to a particle, while the bottom two corresponds to an antiparticle, and for each of these pairs, the top and bottom entries represent the two possible spin states of the spin-\half particle or antiparticle. Now to defining the Dirac-matrices $\gamma^\mu = (\gamma^0,\, \gamma^i)$ for $i=1,2,3$. These matrices are $4 \times 4$ constant matrices that satisfy the Clifford algebra, thus the anticommutator
 \begin{align}
     \anticommutator{\gamma^\mu}{\gamma^\nu} &= 2g^{\mu\nu}\id_4 \: ,
 \end{align}
@@ -196,7 +197,7 @@ The continuum Schwinger model Hamiltonian density can now be found using \cref{e
 \end{split}
 \end{align}
 and thus we get the Hamiltonian\index{Hamiltonian!of Schwinger model!continuum} as the spatial integral of the above density
-\begin{align}
+\begin{align} \label{eq:ContinuumSchwingerModelHamiltonian}
     H &= \int \dd{x} \left[ - \psibar (i \gamma^1 D_1 - m) \psi + \frac{1}{2} E_1 E^1 \right] \: .
 \end{align}
 \index{Schwinger model!continuum!derivation|)}
