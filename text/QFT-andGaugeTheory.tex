@@ -6,13 +6,15 @@
 
 \chapter{Quantum Field Theory and Gauge~Theory} \label{chap:ContinuumQFT}
 
-\ldots
-\lipsum[1-4]
+Quantum field theory is a theoretical framework extending quantum mechanics by combining it with special relativity and classical field theory. While quantum mechanics is concerned with describing one or a few particles and relativistic quantum mechanics extends this focus to include the spin of the particles, quantum field theory is a theory enabling us to describe systems of many particles and also allows the treatment of fields, thus both particles and fields can be treated in the same framework. \cite{stanford_QFT}
+
+In this chapter the basics of quantum field theory and gauge theory will be explained with the goal of deriving the continuum Schwinger model, which is (1+1)-dimensional quantum electrodynamics. Firstly the relativistic notation of four-vectors and tensors is presented in \cref{sec:RelativisticTensorNotation} and the formalism of the Lagrangian and Hamiltonian density will be presented in \cref{sec:LagrangianAndHamiltonianFormalismOfFields}. In \cref{Sec:ContinuumSchwingerModel} the derivation of the continuum Schwinger model will take place starting from the Dirac Lagrangian density (\cref{sec:DiracField}), claiming local U(1) gauge invariance (\cref{sec:ContinuumQFT_LocalU(1)GaugeInvariance}), which results in quantum electrodynamics, and converting from the Lagrangian density to the Hamiltonian while limiting ourselves to (1+1)-dimension (\cref{sec:ContinuumSchwingerModelHamiltonianDensity}).
 
 
 
 
-\section{Relativistic tensor notation}
+\index{tensor!relativistic notation|(}
+\section{Relativistic tensor notation} \label{sec:RelativisticTensorNotation}
 
 In this section the notation of relativistic tensors is presented following Refs. \cite{peskin_introToQFT_1995,Uggerhoej_SpecielRelativitetsteori_2016}. A \emph{four-vector}\index{four-vector}, which is a tensor of rank 1, is a vector with four entries denoting the coordinates of space-time, $a = (a_0,\, a_1,\, a_2,\, a_3)$, with index $0$ denoting the temporal coordinate and index $i$ ($i = 1,2,3$) denotes the spatial coordinates, thus the four-vector might be written as $a = (a_0,\, \Vec{a})$ for $\Vec{a}$ being the regular spatial three-vector. We will be using indices to refer to specific entries of the four-vector\footnote{Indices will also be used to denote the entries of tensors of higher ranks. The number of indices corresponds to the rank of the tensor.}; Greek letter indices run over $0,1,2,3$, while Roman letter indices only run over the spatial coordinates i.e. $1,2,3$.
 
@@ -33,21 +35,14 @@ Some important four-vectors that will be used later on is the space-time coordin
 Note that even thought the derivative is covariant, we are actually differentiating with respect to the contravariant space-time coordinate vector.
 
 We will be using this notation due to it being neat when expressing entrywise equality of equations, and due to it securing covariance of the equations, thus the equations will be independent of the reference frame used \cite{Uggerhoej_SpecielRelativitetsteori_2016}, which is important, since this is the fundamental principle of relativity.
-
-
-% g_µ\nu metric tensor of the Minkowski space
-
-
-
-
-% Four-vector, Einstein notation/summation, Minkowski metric tensor, covariant differential-vector
+\index{tensor!relativistic notation|)}
 
 
 
 
-\section{Lagrangian formalism of fields}
+\section{Lagrangian and Hamiltonian formalism of fields} \label{sec:LagrangianAndHamiltonianFormalismOfFields}
 
-In quantum field theory the dynamics of a system is described using the Lagrangian formalism \cite{peskin_introToQFT_1995,Clark_LagrangianQFT_1988}, but instead of considering the Lagrangian itself one consider the \emph{Lagrangian density}\index{Lagrangian density} $\L$, which is a function of one or more fields \emph{fields}\index{field} $\{\psi_i\}$ and their space- and time-derivatives $\{\partial_\mu \psi_i\}$. From this the action can be calculated as
+In quantum field theory the dynamics of a system is described using the Lagrangian formalism \cite{peskin_introToQFT_1995,Clark_LagrangianQFT_1988}, but instead of considering the Lagrangian itself one consider the \emph{Lagrangian density}\index{Lagrangian density} $\L$, which is a function of one or more \emph{fields}\index{field} $\{\psi_i\}$ and their space- and time-derivatives $\{\partial_\mu \psi_i\}$. From this the action can be calculated as
 \begin{align}
     S &= \int \dd{t} L = \int \dd{t} \int \dd[d]{x} \L = \int \dd[d+1]{x} \L \: ,
 \end{align}
@@ -79,13 +74,13 @@ again with $d$ being the number of spatial dimensions \cite{Clark_LagrangianQFT_
 
 
 
-\subsection{Dirac field}
+\subsection{Dirac field} \label{sec:DiracField}
 
-Due to our interest in examining confinement of quarks, which are spin-\half fermions, we will take as the starting point the most prominent fermionic field, namely the Dirac field. For this field the Lagrangian density\index{Lagrangian density!of Dirac field} is
+Due to our interest in examining confinement of quarks, which are spin-\half fermions, we will take as the starting point the most prominent fermionic field, namely the \emph{Dirac field}. For this field the Lagrangian density\index{Lagrangian density!of Dirac field} is
 \begin{align} \label{eq:DiracLagrangiangDensity}
     \L_D &= \psibar (i \gamma^\mu \partial_\mu - m) \psi \: ,
 \end{align}
-where $\psibar = \gamma^0 \psi\dagger$, $m$ is the mass of the fermion, $\psi$ is a \emph{Dirac spinor}\index{spinor}\index{spinor!Dirac}\index{Dirac spinor|see{spinor, Dirac}}, and $\gamma^\mu$ are the gamma- or \emph{Dirac-matrices}\index{Dirac matrices}\index{gamma-matrices|see{Dirac-matrices}} \cite{peskin_introToQFT_1995,sakurai_modernQM_2017}. For the following descriptions of the above mentioned elements Ref. \cite{peskin_introToQFT_1995} will be laying the foundation. The Dirac spinor $\psi$\index{Spinor!Dirac} is a four component spinor, with each entry being complex. The upper two entries of $\psi$ corresponds to a particle, while the bottom two corresponds to an antiparticle, and for each of these pairs, the top and bottom entries represent the two possible spin states of the spin-\half particle or antiparticle. Now to defining the Dirac-matrices $\gamma^\mu = (\gamma^0,\, \gamma^i)$ for $i=1,2,3$. These matrices are $4 \times 4$ constant matrices that satisfy the Clifford algebra, thus the anticommutator
+where $\psibar = \gamma^0 \psi\dagger$ is the \emph{Dirac adjoint}\index{Dirac adjoint}, $m$ is the mass of the fermion, $\psi$ is a \emph{Dirac spinor}\index{spinor}\index{spinor!Dirac}\index{Dirac spinor|see{spinor, Dirac}}, and $\gamma^\mu$ are the gamma- or \emph{Dirac-matrices}\index{Dirac matrices}\index{gamma-matrices|see{Dirac-matrices}} \cite{peskin_introToQFT_1995,sakurai_modernQM_2017}. For the following descriptions of the above mentioned elements Ref. \cite{peskin_introToQFT_1995} will be laying the foundation. The Dirac spinor $\psi$\index{spinor!Dirac} is a four component spinor, with each entry being complex. The upper two entries of $\psi$ corresponds to a particle, while the bottom two corresponds to an antiparticle, and for each of these pairs, the top and bottom entries represent the two possible spin states of the spin-\half particle or antiparticle. Now to defining the Dirac-matrices $\gamma^\mu = (\gamma^0,\, \gamma^i)$ for $i=1,2,3$. These matrices are $4 \times 4$ constant matrices that satisfy the Clifford algebra, thus the anticommutator
 \begin{align}
     \anticommutator{\gamma^\mu}{\gamma^\nu} &= 2g^{\mu\nu}\id_4 \: ,
 \end{align}
@@ -102,9 +97,8 @@ with $g^{\mu\nu}$ being the Minkowski metric and $\id_4$ a $4 \times 4$ identity
             -\sigma^i & 0
         \end{pmatrix} \: ,
 \end{align}
-with $\id_2$ being a $2 \times 2$ identity matrix and $\sigma^i$ being the Pauli matrices.
+with $\id_2$ being a $2 \times 2$ identity matrix and $\sigma^i$ being the $2 \times 2$ Pauli spin matrices.
 
-As we later will restrict ourselves to only working in (1+1)-dimension, one spatial and one temporal dimension (often denoted (1+1)D), the Dirac-matrices \ldots
 
 
 
@@ -116,7 +110,7 @@ When considering systems one may often also consider their symmetries. Generally
 \end{align}
 with $\alpha$ being a real number. A Lagrangian density being invariant under this transformation is said to be \emph{globally gauge invariant}\index{gauge invariance!global}, thus the wave function's phase will vanish by choosing the correct gauge. Due to $U_\alpha$ being a number and exploiting its unitarity, $U_\alpha\dagger U_\alpha = \id$, it is trivial to show that the Dirac Lagrangian density $\L_D$ is globally U(1) gauge invariant.
 
-In developing quantum field theory one shall not only impose global gauge invariance but instead demand the more strict \emph{local gauge invariance}\index{gauge invariance!local} \cite{griffiths_introToElementaryParticles_2008}. For the transformation in \cref{eq:GlobalU(1)GaugeInvariance} this implies, that the parameter $\alpha$ shall be spacetime-dependent, $\alpha(x^\mu)$. As for most systems, the Dirac Lagrangian density is not locally invariant as it is, thus introduction of new fields for the system to interact with is required \cite{panyella_masterThesis_2019}. As it happens, the requirement of local gauge invariance supplied a systematic way for determining the equations describing the fundamental interactions: The electromagnetic interaction requires -- as we will derive later in this section -- local U(1) invariance, the electroweak interaction requires local SU(2)$\otimes$U(1) invariance\footnote{SU(N)\index{symmetry!SU(N)} being the the group of all unitary $N \times N$ matrices with determinant $1$ \cite{peskin_introToQFT_1995}.}, and the strong nuclear interaction requires local SU(3) invariance \cite{stanford_QFT, griffiths_introToElementaryParticles_2008}, thus the Standard Model of elementary particle physics is a gauge theory resulting from demanding local U(1)$\otimes$SU(2)$\otimes$SU(3) symmetry \cite{stanford_historyOfQFT}.
+In developing quantum field theory one shall not only impose global gauge invariance but instead demand the more strict \emph{local gauge invariance}\index{gauge invariance!local} \cite{griffiths_introToElementaryParticles_2008}. For the transformation in \cref{eq:GlobalU(1)GaugeInvariance} this implies, that the parameter $\alpha$ shall be spacetime-dependent, $\alpha(x^\mu)$. As for most systems, the Dirac Lagrangian density is not locally invariant as it is, thus introduction of new fields for the system to interact with is required \cite{panyella_masterThesis_2019}. As it happens, the requirement of local gauge invariance supplied a systematic way for determining the equations describing the fundamental interactions: The electromagnetic interaction requires -- as we will derive later in this section -- local U(1) invariance, the electroweak interaction requires local SU(2)$\otimes$U(1) invariance\footnote{SU(N)\index{symmetry!SU(N)} being the the group of all unitary $N \times N$ matrices with determinant $1$ \cite{peskin_introToQFT_1995}.}, and the strong nuclear interaction requires local SU(3) invariance \cite{stanford_QFT, griffiths_introToElementaryParticles_2008}, thus the Standard Model\index{Standard Model} of elementary particle physics is a gauge theory resulting from demanding local U(1)$\otimes$SU(2)$\otimes$SU(3) symmetry \cite{stanford_historyOfQFT}.
 
 In the following it will be shown, that the Dirac Lagrangian density, \cref{eq:DiracLagrangiangDensity}, is not locally U(1) invariant, but it will lay the foundation for deriving one that is. The derivation will follow that of Refs. \cite{peskin_introToQFT_1995, griffiths_introToElementaryParticles_2008, panyella_masterThesis_2019}. To lighten the the notation, the parameter $\alpha(x^\mu)$ will be denoted $\alpha$ for the rest of this section. From \cref{eq:GlobalU(1)GaugeInvariance} the conjugated field must transform as
 \begin{align}
@@ -138,15 +132,15 @@ exploiting again the unitarity of the U(1) symmetry group, $U_\alpha\dagger U_\a
 \begin{align} \label{eq:GaugeCovariantDerivative}
     D_\mu &= \partial_\mu + iqA_\mu \: ,
 \end{align}
-which will replace the original derivative. In \cref{eq:GaugeCovariantDerivative} $A_\mu$\index{Amu@$A_\mu$} is a vector field which under U(1) symmetry transforms as
+which will replace the original derivative. In \cref{eq:GaugeCovariantDerivative} $A_\mu$\index{gauge field}\index{Amu@$A_\mu$|see{gauge field}} is a vector field which under U(1) symmetry transforms as
 \begin{align}
     qA_\mu &\rightarrow qA_\mu - \partial_\mu\alpha \: ,
 \end{align}
-for $q$ being a real number. Using this new gauge covariant derivative, the Lagrangian density becomes locally U(1) gauge invariant:
+for $q$ being a real number, which in \cref{sec:qIsChangeShowed} will be shown to be the charge of the particle. Using this new gauge covariant derivative, the Lagrangian density becomes locally U(1) gauge invariant:
 \begin{align}
 \begin{split}
     \psibar (i \gamma^\mu D_\mu - m) \psi \rightarrow
-        & \psibar \exp{-i\alpha} (i \gamma^\mu [\partial_\mu + iqA_\mu - i\partial_\mu\alpha] - m) \exp{i\alpha} \psi \\
+        & \psibar \exp{-i\alpha} (i \gamma^\mu [\partial_\mu + iqA_\mu - i(\partial_\mu\alpha)] - m) \exp{i\alpha} \psi \\
         =& \psibar (i \gamma^\mu [\partial_\mu + i \partial_\mu \alpha + iqA_\mu - i\partial_\mu\alpha] - m) \psi \\
         =& \psibar (i \gamma^\mu D_\mu - m) \psi \: .
 \end{split}
@@ -169,7 +163,7 @@ where the factor of $-\nicefrac{1}{4}$ is due to convention. This is the Lagrang
 
 
 
-\subsection{Hamiltonian density} \label{sec:ContinuumSchwingerModelHamiltonianDensity}
+\subsection{Schwinger model Hamiltonian} \label{sec:ContinuumSchwingerModelHamiltonianDensity}
 
 In this section the arguments will mostly follow that of Ref. \cite{melnikov_latticeSchwingerModel_2000}. We choose make the common gauge restriction to work in the temporal gauge, thus the temporal part of the the vector field $A_\mu$ is zero, $A_0 = 0$. From this choice of gauge and that of working in (1+1)-dimensions, i.e. $\mu,\nu = 0,1$, one can reduce \cref{eq:ContinuumSchwingerModelLagrangianDensity} to
 \begin{align} \label{eq:ContinuumSchwingerModelLagrangianDensityAfterA0=0}
@@ -201,6 +195,13 @@ and thus we get the Hamiltonian\index{Hamiltonian!of Schwinger model!continuum} 
     H &= \int \dd{x} \left[ - \psibar (i \gamma^1 D_1 - m) \psi + \frac{1}{2} E_1 E^1 \right] \: .
 \end{align}
 \index{Schwinger model!continuum!derivation|)}
+
+As it shall later be shown, it is important to introduce the \emph{generator}\index{generator!of U(1) symmetry} of the U(1) symmetry
+\begin{align} \label{eq:GeneratorU(1)SymmetryContinuum}
+    G(x) &= \partial_1 \pdv{\L}{(\partial_0 A_1)} - q \psi\dagger \psi
+        = \partial_1 E^1 - q \psi\dagger \psi \: ,
+\end{align}
+where the electric field is the conjugate momentum field to the gauge field, and the generator generates the U(1) symmetry since it recovers the gauge transformations of $\psi$ and $A_\mu$ by a similarity transformation with the unitary operator $\exp{-i\alpha G/q}$, i.e. $\exp{i\alpha G/q} \psi \exp{-i\alpha G(x)/q} = \exp{i\alpha}\psi$ \cite{panyella_masterThesis_2019}.
 
 
 

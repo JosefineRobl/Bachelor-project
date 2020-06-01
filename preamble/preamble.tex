@@ -188,7 +188,7 @@
     style=numeric-comp, % Citing [1-3] not [1,2,3]
     sorting=none, % No sorting of bibliography entries (i.e. order of appearance in text)
     % dashed=false, % No dash instead of author if the same author on article n and n+1
-    maxbibnames=3, % Increase/decrease to include more/fewer authors in the bibliography
+    maxbibnames=4, % Increase/decrease to include more/fewer authors in the bibliography
     doi=true, % Show DOI number
     url=true, % Show URL
     isbn=true, % Show ISBN
@@ -211,7 +211,7 @@
 \makeindex[
     % columns = 2, % Number of columns (2 is default)
     % title = Index,
-    options = -s preamble/indexPreamble.ist, % Each section in the index will be accompanied by their first letter (capital) in boldface
+    options = -s preamble/indexPreamble.ist, % Each section in the index will be accompanied by their first letter (capital) in boldface - runs the command in the .ist document
     intoc, % Index in TOC
 ] % Lets one write to the index
 % Uses the command \index{<entry>} and if nested \index{<entry>!<nested entry>}

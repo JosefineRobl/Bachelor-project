@@ -9,6 +9,11 @@
 
 \thispagestyle{empty} % To be able to write on the backside of the title page
 
+% Sets the margins for the colophon page only for scrreprt class
+\ifthenelse{\boolean{book}}{}{
+    \newgeometry{lmargin=5cm, rmargin=5cm, tmargin=4.75cm, bmargin=3.8cm}
+}
+
 \vspace*{\fill} % Let the text be placed at the bottom of the page
 
 \begin{center} % Centering the colophon title
@@ -34,18 +39,28 @@ Email: \AuthorEmail \vspace{1.5em} % One and a half space
 \vspace{.5em} % Half space
 
 \noindent % For no indentation of the below line
-Layout and typeset by the author with LaTeX and the KOMA-Script document class, using Linux Libertine 12pt at A4 paper.
+Layout and typeset by the author with \LaTeX\, and the KOMA-Script document class, using Linux Libertine 12pt on A4 paper.
 \vspace{.5em} % Half space
 
 \noindent % For no indentation of the below line
-Figures are made with TikZ/PGF and Google Drawings.
+Figures are made with TikZ/PGF in \LaTeX, Inkscape and Matplotlib in Python.
 \vspace{.5em} % Half space
 
-\noindent % For no indentation of the below line
-Printed by AU TRYK, Aarhus University.
+\noindent
+Front image: \cref{fig:QuarkConfinement} picturing string breaking and quark confinement in a meson.
+%
+\ifthenelse{\boolean{book}}{
+    % The space here beneath needs to be here for the correct spacing in the pdf (normal space)
+
+    \noindent % For no indentation of the below line
+    Printed by AU TRYK, Aarhus University.
+}{}
 
 %%%%%%%%%%%%%%%%%%%% ONLY ABOVE YOU HAVE TO WRITE %%%%%%%%%%%%%%%%%%%%
 
+\ifthenelse{\boolean{book}}{}{
+    \restoregeometry % Sets the geometry (margins) back to the in preamble defined
+}
 
 \end{document}
 
