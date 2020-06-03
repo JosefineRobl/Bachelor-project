@@ -4,14 +4,15 @@
 
 \begin{document}
 
+% \chapter{Lattice Schwinger Model and Confinement} \label{chap:Confinement}
 \chapter{Confinement in the Lattice Schwinger Model} \label{chap:Confinement}
-% Alternative title ''Schwinger model and confinement''
 
 \ldots
 
 
 
-\section{QED, QCD, and confinement}
+% \section{Confinement and string breaking}
+\section{QED, QCD, and confinement} \label{sec:Confinement}
 
 \lipsum[1-3]
 
@@ -45,7 +46,7 @@
 
 
 
-\subsection{Lattice Schwinger model exhibiting confinement} \label{sec:qIsChangeShowed}
+\section{Lattice Schwinger model exhibiting confinement} \label{sec:LatticeSchwingerModelAndConfienemt}
 
 \ldots
 
@@ -53,6 +54,12 @@
 \begin{align}
     H &= a \sum_n \left[ (-1)^{n+1} \frac{m}{2} \sigma_n^z - \frac{1}{2a} \left( \sigma_n^+ S_n^+ \sigma_{n+1}^- + \mathrm{h.c.} \right) + \frac{a^2 q^2 S^2}{2} \left( S_n^z \right)^2 \right]
 \end{align}
+
+
+
+\subsection{Computing the states} \label{sec:StateComputing}
+
+\ldots
 
 \cref{eq:GeneratorU(1)SymmetryDiscretized} changes to become
 \begin{align}
@@ -71,12 +78,12 @@ for $S=1$. \cite{buyens_confinementAndStringBreaking_2016}
          & Even $n$ & Odd $n$ \\ \hline
         $\ket{\, 0_g\, 0_m\, 0_g}$ & $0$ & $1$ \\ \hline
         $\ket{\, 0_g\, 1_m\, 0_g}$ & $-1$ & $0$ \\ \hline
-        $\ket{\, 0_g\, 0_m\, 1_g}$ & $-1$ & $0$ \\ \hline
-        $\ket{\, 0_g\, 1_m\, 1_g}$ & $-2$ & $-1$ \\ \hline
-        $\ket{\, 0_g\, 0_m\, 2_g}$ & $-2$ & $-1$ \\ \hline
-        $\ket{\, 0_g\, 1_m\, 2_g}$ & $-3$ & $-2$ \\ \hline
-        $\ket{\, 1_g\, 0_m\, 0_g}$ & $1$ & $2$ \\ \hline
-        $\ket{\, 1_g\, 1_m\, 0_g}$ & $0$ & $1$ \\ \hline
+        $\ket{\, 0_g\, 0_m\, 1_g}$ & $1$ & $2$ \\ \hline
+        $\ket{\, 0_g\, 1_m\, 1_g}$ & $0$ & $1$ \\ \hline
+        $\ket{\, 0_g\, 0_m\, 2_g}$ & $2$ & $3$ \\ \hline
+        $\ket{\, 0_g\, 1_m\, 2_g}$ & $1$ & $2$ \\ \hline
+        $\ket{\, 1_g\, 0_m\, 0_g}$ & $-1$ & $0$ \\ \hline
+        $\ket{\, 1_g\, 1_m\, 0_g}$ & $-2$ & $-1$ \\ \hline
         $\ket{\, 1_g\, 0_m\, 1_g}$ & $0$ & $1$ \\ \hline
         \multicolumn{3}{|c|}{\textsl{continued to the right}} \\ \hline
     \end{tabular}
@@ -87,12 +94,12 @@ for $S=1$. \cite{buyens_confinementAndStringBreaking_2016}
          & Even $n$ & Odd $n$ \\ \hline
         \multicolumn{3}{|c|}{\textsl{continued from the left}} \\ \hline
         $\ket{\, 1_g\, 1_m\, 1_g}$ & $-1$ & $0$ \\ \hline
-        $\ket{\, 1_g\, 0_m\, 2_g}$ & $-1$ & $0$ \\ \hline
-        $\ket{\, 1_g\, 1_m\, 2_g}$ & $-2$ & $-1$ \\ \hline
-        $\ket{\, 2_g\, 0_m\, 0_g}$ & $2$ & $3$ \\ \hline
-        $\ket{\, 2_g\, 1_m\, 0_g}$ & $1$ & $2$ \\ \hline
-        $\ket{\, 2_g\, 0_m\, 1_g}$ & $1$ & $2$ \\ \hline
-        $\ket{\, 2_g\, 1_m\, 1_g}$ & $0$ & $1$ \\ \hline
+        $\ket{\, 1_g\, 0_m\, 2_g}$ & $1$ & $2$ \\ \hline
+        $\ket{\, 1_g\, 1_m\, 2_g}$ & $0$ & $1$ \\ \hline
+        $\ket{\, 2_g\, 0_m\, 0_g}$ & $-2$ & $-1$ \\ \hline
+        $\ket{\, 2_g\, 1_m\, 0_g}$ & $-3$ & $-2$ \\ \hline
+        $\ket{\, 2_g\, 0_m\, 1_g}$ & $-1$ & $0$ \\ \hline
+        $\ket{\, 2_g\, 1_m\, 1_g}$ & $-2$ & $-1$ \\ \hline
         $\ket{\, 2_g\, 0_m\, 2_g}$ & $0$ & $1$ \\ \hline
         $\ket{\, 2_g\, 1_m\, 2_g}$ & $-1$ & $0$ \\ \hline
     \end{tabular}
@@ -102,11 +109,78 @@ for $S=1$. \cite{buyens_confinementAndStringBreaking_2016}
 
 
 
+\subsection{Confinement and string breaking} \label{sec:ConfienementAndStringBreakingAnalyticalAndNumerical}
 
-% MÅL FOR BACHELORPROJEKT NUMERISK DEL
-% * Potential eller kraft som funktion af afstand
-% * Der kan ikke eksistere en quark uden en antiquark og vice versa
-% * Afstand eller energi for hvilken string breaking sker
+\subsubsection{Analytical results}
+
+\ldots
+
+
+
+\subsubsection{Numerical results}
+
+\ldots
+
+\begin{figure}[t]
+    \centering
+    \begin{tikzpicture}[
+        % Definition of node styles
+        particle/.style={circle, fill=red!100, very thick, minimum size=2mm},
+        antiparticle/.style={circle, fill=blue!100, very thick, minimum size=2mm},
+        node distance = 1.75cm,
+        emptysite/.style={circle, draw=black!40, minimum size=2mm},
+        node distance = 1.75cm,
+        ]
+        %
+        % Nodes
+        \node[label={[label distance=.3cm]above:{\large $E_n$ direction}}, label={[label distance=.3cm]below:{\large Site number}}] (text) {\large Configuration};
+        \node[antiparticle, label={[label distance=.5cm]below:{\large $1$}}] (firstParticle) [right=.5cm of text] {};
+        \node[emptysite, label={[label distance=.5cm]below:{\large $2$}}] (firstAntiparticle) [right=of firstParticle] {};
+        \node[emptysite, label={[label distance=.5cm]below:{\large $3$}}] (secondParticle) [right=of firstAntiparticle] {};
+        \node[particle, label={[label distance=.5cm]below:{\large $4$}}] (secondAntiparticle) [right=of secondParticle] {};
+        %
+        % Links
+        \draw[dashed] (firstParticle.east) -- node[above=0.75cm, midway, black] {\Large $\leftarrow$} (firstAntiparticle.center);
+        \draw[dashed] (firstAntiparticle.center) -- node[above=0.75cm, midway, black] {\Large $\leftarrow$} (secondParticle.center);
+        \draw[dashed] (secondParticle.center) --  node[above=0.75cm, midway, black] {\Large $\leftarrow$} (secondAntiparticle.west);
+        %
+        % Name of the state
+        \node at (-1,2) {\large \underline{State $\varphi$}};
+    \end{tikzpicture}
+    \newline
+    \vspace{.4em}
+    \begin{tikzpicture}[
+        % Definition of node styles
+        particle/.style={circle, fill=red!100, very thick, minimum size=2mm},
+        antiparticle/.style={circle, fill=blue!100, very thick, minimum size=2mm},
+        node distance = 1.75cm,
+        ]
+        %
+        % Nodes
+        \node[label={[label distance=.3cm]above:{\large $E_n$ direction}}, label={[label distance=.3cm]below:{\large Site number}}] (text) {\large Configuration};
+        \node[antiparticle, label={[label distance=.5cm]below:{\large $1$}}] (firstParticle) [right=.5cm of text] {};
+        \node[particle, label={[label distance=.5cm]below:{\large $2$}}] (firstAntiparticle) [right=of firstParticle] {};
+        \node[antiparticle, label={[label distance=.5cm]below:{\large $3$}}] (secondParticle) [right=of firstAntiparticle] {};
+        \node[particle, label={[label distance=.5cm]below:{\large $4$}}] (secondAntiparticle) [right=of secondParticle] {};
+        %
+        % Links
+        \draw[dashed] (firstParticle.east) -- node[above=0.75cm, midway, black] {\Large $\leftarrow$} (firstAntiparticle.west);
+        \draw[dashed, black!40] (firstAntiparticle.east) -- node[above=0.75cm, midway, black] {\Large $0$} (secondParticle.west);
+        \draw[dashed] (secondParticle.east) --  node[above=0.75cm, midway, black] {\Large $\leftarrow$} (secondAntiparticle.west);
+        %
+        % Name of the state
+        \node at (-1,2) {\large \underline{State $\chi$}};
+    \end{tikzpicture}
+    \caption{The two states for which the numerical study of string breaking is performed. The system starts in state $\varphi$ with the variables set to be favourable for string breaking, thus the system will over time go to state $\chi$. The red and blue circles are quarks and antiquarks respectively, the grey outlined circles are sites with neither a quark nor an antiquark, and the dashed lines is the gauge field (electric field). The direction of the electric field between the quarks and antiquarks is noted above the lattice links, and the grey dashed line reflects the electric field not being present.}
+    \label{fig:SystemForNumericalSimulationOfConfinementAndStringBreaking}
+\end{figure}
+
+
+
+
+\section{Outlook} \label{sec:Outlook}
+
+\ldots
 
 
 

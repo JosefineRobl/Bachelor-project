@@ -6,8 +6,11 @@
 
 \chapter{Quantum Field Theory on a Lattice} \label{chap:LatticeQFT}
 
-\ldots
-\lipsum[1-2]
+In this chapter we will go through the process of discretizing the continuum Schwinger model Hamiltonian. This serves two purposes: Firstly \ldots \lipsum[10]
+
+The second purpose of the discretization is that of wanting to simulate the system using the lattice Schwinger model on a computer. A computer is not able to handle continually variables, since this would result in infinitely many points to calculate, thus the variables must be discretized for the computer to be able to work with them. Introducing the discretization from start one hopes to be able to analytically solve a larger part of the system before using computer simulations \cite{panyella_masterThesis_2019}.
+
+As mentioned above, this chapter will focus on the discretization process of the continuum Schwinger model Hamiltonian. Firstly the overall discretization to lattice gauge theory is presented in \cref{sec:Discretization}. In \cref{sec:MappingToSpinSystem} the discretization is taken one step further by mapping the operators and fields to spin operators, since spin systems are well known and thus we already know how to manipulate them. This is done in two steps: The matter fields are mapped to spin-\half operators through the Jordan-Wigner transformation (\cref{sec:Jordan-WignerTransformation}) and the gauge field operator is mapped to spin-$S$ operators using quantum link models (\cref{eq:QuantumLinkModel}). Lastly in \cref{sec:SpinModelOfTheLatticeSchwingerModel} the (1+1)-dimensional Schwinger model Hamiltonian is rewritten in terms of the spin operators.
 
 As in \cref{sec:ContinuumSchwingerModelHamiltonianDensity} we will in this chapter only be concerned with (1+1)-dimensions, since our main goal is to derive the lattice Schwinger model.
 
@@ -26,7 +29,7 @@ where $a$ is the lattice spacing and $n$ the lattice site number. Thus the matte
 \end{align}
 with the lattice spacing multiplied for the correct spacing between the matter sites.
 
-When discretizing the spatial derivative, one might propose the derivative to be the the difference in the field at two nearby sites divided by the lattice spacing, $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$, but this turns out to cause difficulties, namely the \emph{lattice fermion doubling}\index{fermion doubling}\index{lattice fermion doubling|see{fermion doubling}} problem. This is a problem of degeneracy of fermions, which is $2^d$ for $d$ discretized dimensions, thus the discretized theory will include $2^d$ fermions for each original (continuum) fermion \cite{GoswamiBandyopadhyay_FermionDoubling_1997}. Instead of having $2^1 = 2$ fermions in our space discretized (1+1)-dimensional model, we will instead solve the fermion doubling problem by imposing \emph{staggered fermions}\index{staggered fermions} also known as Kogut-Susskind fermions\index{Kogut-Susskind fermions|see{staggered fermions}} \cite{susskind_latticeFermions_1977, banksSusskindKogut_StrongCoupling_1976}: One replaces the four-component spinor $\psi$ with a two-component spinor, $\psi_n$, which entries corresponds to the two possible spin states, and one impose $\psi_n$ at even $n$ to represent the matter field of a particle, while representing an antiparticle for $n$ being odd, see \cref{fig:StaggeredFermionsOnALattice}. By representing either a particle or an antiparticle, the matter fields necessitates a staggered mass term, $(-1)^n \psi_n\dagger m \psi_n$, to replace the mass term in \cref{eq:ContinuumSchwingerModelHamiltonian} \cite{susskind_latticeFermions_1977}. Now for discretizing the spatial derivative of the matter field, one still employs the difference of the two nearby matter fields divided by the distance between them, now the nearby fields shall just be interpreted as the two nearby particle or antiparticle matter fields, thus \cite{susskind_latticeFermions_1977}
+When discretizing the spatial derivative, one might propose the derivative to be the the difference in the field at two nearby sites divided by the lattice spacing, $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$, but this turns out to cause difficulties, namely the \emph{lattice fermion doubling}\index{fermion doubling}\index{lattice fermion doubling|see{fermion doubling}} problem. This is a problem of degeneracy of fermions, which is $2^d$ for $d$ discretized dimensions, thus the discretized theory will include $2^d$ fermions for each original (continuum) fermion \cite{GoswamiBandyopadhyay_FermionDoubling_1997}. Instead of having $2^1 = 2$ fermions in our space discretized (1+1)-dimensional model, we will instead solve the fermion doubling problem by imposing \emph{staggered fermions}\index{staggered fermions} also known as Kogut-Susskind fermions\index{Kogut-Susskind fermions|see{staggered fermions}} \cite{susskind_latticeFermions_1977, banksSusskindKogut_StrongCoupling_1976}: One replaces the four-component spinor $\psi$ with a two-component spinor, $\psi_n$, which entries corresponds to the two possible spin states, and one impose $\psi_n$ at even $n$ to represent the matter field of a particle, while representing an antiparticle for $n$ being odd, see \cref{fig:StaggeredFermionsOnALattice}. By representing either a particle or an antiparticle, the matter fields necessitates a staggered mass term, $(-1)^n \psi_n\dagger m \psi_n$, to replace the mass term in \cref{eq:ContinuumSchwingerModelHamiltonian} \cite{susskind_latticeFermions_1977}, such that particles are associated with positive mass while antiparticles are associated with negative mass. Now for discretizing the spatial derivative of the matter field, one still employs the difference of the two nearby matter fields divided by the distance between them, now the nearby fields shall just be interpreted as the two nearby particle or antiparticle matter fields, thus \cite{susskind_latticeFermions_1977}
 \begin{align}
     \partial_1 \psi &\rightarrow \frac{\psi_{n+1} - \psi_{n-1}}{2a} \: .
 \end{align}
@@ -110,25 +113,21 @@ which in the continuum limit $a \rightarrow 0$ replicates the continuum Schwinge
 
 
 % \section{Equivalent spin formalism of the lattice Schwinger model}
-\section{Mapping to spin system}
+\section{Mapping to spin system} \label{sec:MappingToSpinSystem}
 
 In the previous section we have gone through the derivation of the lattice Scwhinger model, \cref{eq:LatticeSchwingerModelHamiltonian}, from the continuum Schwinger model. This discretization allows us to simulate a system using the lattice Schwinger model Hamiltonian, since computers are not able to process continuous variables but need discretized versions of them. In the following we will provided yet another step in the process of making the Hamiltonian easier computable by introducing transformations mapping the operators to that of spin systems. This will be done in two steps: Firstly the matter fields are transformed using the Jordan-Wigner transformation\index{Jordan-Wigner transformation}, and secondly the gauge fields are transformed using quantum link models\index{quantum link model}.
 
 
 
 \index{Jordan-Wigner transformation|(}
-\subsection{Jordan-Wigner transformation}
+\subsection{Jordan-Wigner transformation} \label{sec:Jordan-WignerTransformation}
 
 The \emph{Jordan-Wigner transformation} is a transformation mapping fermionic creation and annihilation operators onto spin operators of the spin-\half system for one-dimensional lattices, thus we will use this to transform the fermions on the matters sites to spin step operators. This section will take its starting point in Refs. \cite{jordan-wigner_1928, banksSusskindKogut_StrongCoupling_1976, panyella_masterThesis_2019}.
 
 Remembering the definition of the step spin operators \cite{sakurai_modernQM_2017}
-\index{sigmaplus@$\sigma^+$|(}
-\index{sigmaminus@$\sigma^-$|(}
-\begin{align}
+\begin{align} \index{sigmaplus@$\sigma^+$}\index{sigmaminus@$\sigma^-$}
     \sigma^\pm &= \frac{\sigma_x \pm i \sigma_y}{2} \: ,
 \end{align}
-\index{sigmaminus@$\sigma^-$|)}
-\index{sigmaplus@$\sigma^+$|)}
 one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice site, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
 
 To accommodate the above stated problem we introduce the Jordan-Wigner transformation\index{Jordan-Wigner transformation}
@@ -158,7 +157,7 @@ due to the added product part in this case cancels with itself. Due to the possi
 
 
 \index{quantum link model|(}
-\subsection{Quantum link models}
+\subsection{Quantum link models} \label{sec:QuantumLinkModels}
 
 In \cref{sec:Discretization} we made the first approximations to our continuum theory by discretizing it, and in this section we will further approximate the discretized theory for it to be expressed by spins \cite{Hauke_QLM_2013}, which is a system well suited for quantum computation, since we are familiar with manipulating it. This further approximation is done using \emph{quantum link models}\index{quantum link model}, which restricts the Hilbert space of the gauge fields to be finite instead of infinite \cite{Barros_GaugeTheoriesWithUltracoldAtoms_2020}, since the latter is not fit for computer simulations.
 
@@ -178,23 +177,22 @@ for $i,j,k = x,y,z$ and $\epsilon_{ijk}$ being the Levi-Civita symbol defining t
 
 Now letting the angular momentum be that of the spin formalism, $E_n$, $U_n$ and $U_n\dagger$ can be represented by finite spin $S$ using the spin operators $S^i$ ($i=z,+,-$) as
 \begin{align} \label{eq:QuantumLinkModel}
-    E_n &= - aq S S_n^z \: , \quad
+    E_n &= aq S S_n^z \: , \quad
     U_n = S_n^+ \: , \quad \text{and} \quad
-    U_n\dagger = S_n^- \: ,
+    U_n\dagger = S_n^- \: .
 \end{align}
-where the sign convention of $E_n$ is due to us denoting the ground state and excited states differently than normally, which will be further explained in \cref{chap:Confinement}.
 \index{quantum link model|)}
 
 
 
-\subsection{Spin model of the lattice Schwinger model}
+\subsection{Spin model of the lattice Schwinger model} \label{sec:SpinModelOfTheLatticeSchwingerModel}
 
 Equipped with the tools of transforming matter fields and gauge fields to be dependent of the spin operators, we can now remodel the Hamiltonian of the lattice Schwinger model in terms of spin. Substituting the operators of \cref{eq:LatticeSchwingerModelHamiltonian} according to \cref{eq:Jordan-WignerTransformation,eq:QuantumLinkModel} results in the Hamiltonian
 \index{Hamiltonian!of Schwinger model!lattice!spin formulation|(}
 \index{Schwinger model!lattice!spin formulation|(}
 \begin{align} \label{eq:LatticeSchwingerModelHamiltonianSpin}
 \begin{split}
-    H &= a \sum_n \left[ (-1)^n m \sigma_n^+ \sigma_n^- - \frac{i}{2a} \left( \sigma_n^+ S_n^+ i \sigma_n^z \sigma_{n+1}^- - \mathrm{h.c.} \right) + \frac{1}{2} \left( - aq S S_n^z \right)^2 \right] \\
+    H &= a \sum_n \left[ (-1)^n m \sigma_n^+ \sigma_n^- - \frac{i}{2a} \left( \sigma_n^+ S_n^+ i \sigma_n^z \sigma_{n+1}^- - \mathrm{h.c.} \right) + \frac{1}{2} \left( aq S S_n^z \right)^2 \right] \\
         &= a \sum_n \left[ (-1)^{n+1} \frac{m}{2} \sigma_n^z - \frac{1}{2a} \left( \sigma_n^+ S_n^+ \sigma_{n+1}^- + \mathrm{h.c.} \right) + \frac{a^2 q^2 S^2}{2} \left( S_n^z \right)^2 \right] \: ,
 \end{split}
 \end{align}
