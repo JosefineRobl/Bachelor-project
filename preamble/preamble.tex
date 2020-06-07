@@ -30,6 +30,7 @@
     bookmarksdepth=2 % Bookmarks include chapters, sections and subsection
 ]{hyperref} % Hyperlinks
 \usepackage{physics} % Physics
+\usepackage{siunitx} % SI units (units, numbers and numbers with units)
 \usepackage{nicefrac} % Nice in text fractions
 \usepackage{lipsum} % Dummy text
 
@@ -216,8 +217,6 @@
 ] % Lets one write to the index
 % Uses the command \index{<entry>} and if nested \index{<entry>!<nested entry>}
 
-\usepackage{repeatindex}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% REFERENCES
@@ -257,6 +256,8 @@
 \usepackage{epstopdf} % Converting EPS files to PDF
 \usepackage{tikz} % Drawing
 \usetikzlibrary{positioning} % For relative positioning of nodes
+\usetikzlibrary{decorations.markings} % For arrows in the middle of lines
+\usetikzlibrary{arrows}
 \usepackage[format=plain]{caption} % For no indent of caption text to fit end of caption name
 
 % Set caption font
@@ -292,3 +293,18 @@
 % Renewing \dagger to be a superscript
 \let\olddagger\dagger
 \renewcommand{\dagger}{^\olddagger}
+
+% Tikz arrows in the middle of a line
+\tikzset{middlearrow/.style={
+        decoration={markings,
+            mark= at position 0.525 with {\arrow[scale=3,black]{#1}},
+        },
+        postaction={decorate}
+    }}
+% Tikz arrows in the middle of a line (for short lines, i.e. 2.5 cm with end circle nodes)
+\tikzset{almostmiddlearrow/.style={
+        decoration={markings,
+            mark= at position 0.58 with {\arrow[scale=3,black]{#1}},
+        },
+        postaction={decorate}
+    }}

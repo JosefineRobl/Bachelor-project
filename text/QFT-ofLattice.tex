@@ -6,7 +6,9 @@
 
 \chapter{Quantum Field Theory on a Lattice} \label{chap:LatticeQFT}
 
-In this chapter we will go through the process of discretizing the continuum Schwinger model Hamiltonian. This serves two purposes: Firstly \ldots \lipsum[10]
+In this chapter we will go through the process of discretizing the continuum Schwinger model Hamiltonian. This serves two purposes: Firstly Quantum field theory is notorious for its divergences, which manifests itself for particle momenta near zero and infinite due to integration with respect to the momenta \cite{peskin_introToQFT_1995, panyella_masterThesis_2019}. The divergences are called the \emph{ultraviolet divergence} and the \emph{infrared divergence} respectively.
+
+% \ldots Suspendisse vitae elit. Aliquam arcu neque,ornare in,  ullamcorper quis,  commodo eu,  libero. Fusce sagit-tis erat at erat tristique mollis. Maecenas sapien libero, molestieet,  lobortis in,  sodales eget,  dui.  Morbi ultrices rutrum lorem. Nam elementum ullamcorper leo.  Morbi dui.  Aliquam sagittis.Nunc placerat. Pellentesque tristique sodales est. Maecenas im-perdiet lacinia velit. Cras non urna. Morbi eros pede, suscipit ac,varius vel, egestas non, eros.  Praesent malesuada, diam id pre-tium elementum, eros sem dictum tortor, vel consectetuer odiosem sed.
 
 The second purpose of the discretization is that of wanting to simulate the system using the lattice Schwinger model on a computer. A computer is not able to handle continually variables, since this would result in infinitely many points to calculate, thus the variables must be discretized for the computer to be able to work with them. Introducing the discretization from start one hopes to be able to analytically solve a larger part of the system before using computer simulations \cite{panyella_masterThesis_2019}.
 
@@ -76,7 +78,7 @@ Having restricted matter fields to live only at the lattice sites it is natural 
     U_n &= \exp{iaqA_n}
 \end{align}
 living on the links between matter sites, and restricting the gauge field to only enter the discretized Hamiltonian through this operator \cite{banksSusskindKogut_StrongCoupling_1976}. Using the generator of the U(1) symmetry, \cref{eq:GeneratorU(1)SymmetryContinuum}, discretized using the above stated techniques and that the derivative is discretized by $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$,
-\begin{align} \label{eq:GeneratorU(1)SymmetryDiscretized}
+\begin{align} \label{eq:GeneratorU(1)SymmetryDiscretized} \index{generator!of U(1) symmetry!discretized}\index{generator!of U(1) symmetry}
     G_n = \frac{E_n - E_{n-1}}{a} - q \psi_n\dagger \psi_n \: ,
 \end{align}
 one is able to show, that terms of the form
@@ -90,7 +92,7 @@ We have now introduced all the tools needed to discretize the continuum Schwinge
     \int \dd{x} \left[ \psi\dagger m \psi + \frac{1}{2} E_1 E^1 \right]
     &\rightarrow a \sum_n \left[ (-1)^n m \psi_n\dagger \psi_n + \frac{1}{2} E_n^2 \right] \: ,
 \end{align}
-which is already locally gauge invariant terms according to \cref{eq:LatticeGaugeTheory_LocallyGaugeInvariantTerms}. Taking into account the staggered mass, the first term approaches the mass term of the continuum Hamiltonian, and the second term approaches the electric field term, thus \cref{eq:LatticeSchwingerModel_MassAndElectricFieldPart} shall be used for the discretized Hamiltonian. Considering now the last terms of the continuum Schwinger model Hamiltonian one notices that
+which is already locally gauge invariant terms according to \cref{eq:LatticeGaugeTheory_LocallyGaugeInvariantTerms}. Taking into account the staggered mass, the first term approaches the mass term of the continuum Hamiltonian, and the second approaches the electric field term, thus \cref{eq:LatticeSchwingerModel_MassAndElectricFieldPart} shall be used for the discretized Hamiltonian. Considering now the last terms of the continuum Schwinger model Hamiltonian one notices that
 \begin{align} \label{eq:LatticeSchwingerModel_DifferentialPart}
 \begin{split}
     \int \dd{x} &\left( -i\psi\dagger \left[ \partial_1 + iqA_1 \right] \psi \right) \\
@@ -128,7 +130,7 @@ Remembering the definition of the step spin operators \cite{sakurai_modernQM_201
 \begin{align} \index{sigmaplus@$\sigma^+$}\index{sigmaminus@$\sigma^-$}
     \sigma^\pm &= \frac{\sigma_x \pm i \sigma_y}{2} \: ,
 \end{align}
-one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice site, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
+one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice site due to $A_n B_m$ for $n \ne m$ is short notation of the tensor product $A_n \otimes B_m$, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
 
 To accommodate the above stated problem we introduce the Jordan-Wigner transformation\index{Jordan-Wigner transformation}
 \begin{align} \label{eq:Jordan-WignerTransformation}
@@ -198,7 +200,7 @@ Equipped with the tools of transforming matter fields and gauge fields to be dep
 \end{align}
 \index{Schwinger model!lattice!spin formulation|)}
 \index{Hamiltonian!of Schwinger model!lattice!spin formulation|)}
-where we have used the fact that the multiplication of the step up and down spin operators is $\sigma_n^+ \sigma_n^- = (1 - \sigma_n^z)/2$, where the offset constant has been removed, due to it not changing the physics, that the Hermitian conjugate of the imaginary unit is $i\dagger = -i$, and that $\sigma_n^+ \sigma_n^z = -\sigma_n^+$ \footnote{This can be used since the operators on different sites and links are connected using the tensor product, thus $\sigma_n^z$ can be pulled through $\S_n^+$} thus $(-\sigma_n^+)\dagger = - (\sigma_n^+)\dagger$.
+where we have used the fact that the multiplication of the step up and down spin operators is $\sigma_n^+ \sigma_n^- = (1 - \sigma_n^z)/2$, where the offset constant has been removed, due to it not changing the physics, that the Hermitian conjugate of the imaginary unit is $i\dagger = -i$, and that $\sigma_n^+ \sigma_n^z = -\sigma_n^+$ \footnote{This can be used since the operators on different sites and links are connected using the tensor product, i.e. $A_n B_m C_n = (A_n \otimes \id) (\id \otimes B_m) (C_n \otimes \id) = (A_n C_n) \otimes B_m$ for $n \ne m$, thus $\sigma_n^z$ can be ''pulled through'' $S_n^+$ due to the identity in the tensor product.} thus $(-\sigma_n^+)\dagger = - (\sigma_n^+)\dagger$.
 
 
 
