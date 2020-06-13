@@ -92,9 +92,15 @@
 \subfile{text/conclusion.tex}
 
 
-
 % Prints the bibliography
 \printbibliography
+
+
+% Makes the appendix environment
+\renewcommand{\thesection}{A\arabic{section}}
+% Imports the file containing the appendix
+\subfile{text/appendix.tex}
+
 
 % If book style
 \ifthenelse{\boolean{book}}{

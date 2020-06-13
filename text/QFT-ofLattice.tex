@@ -10,7 +10,7 @@ In this chapter we will go through the process of discretizing the continuum Sch
 
 % \ldots Suspendisse vitae elit. Aliquam arcu neque,ornare in,  ullamcorper quis,  commodo eu,  libero. Fusce sagit-tis erat at erat tristique mollis. Maecenas sapien libero, molestieet,  lobortis in,  sodales eget,  dui.  Morbi ultrices rutrum lorem. Nam elementum ullamcorper leo.  Morbi dui.  Aliquam sagittis.Nunc placerat. Pellentesque tristique sodales est. Maecenas im-perdiet lacinia velit. Cras non urna. Morbi eros pede, suscipit ac,varius vel, egestas non, eros.  Praesent malesuada, diam id pre-tium elementum, eros sem dictum tortor, vel consectetuer odiosem sed.
 
-The second purpose of the discretization is that of wanting to simulate the system using the lattice Schwinger model on a computer. A computer is not able to handle continually variables, since this would result in infinitely many points to calculate, thus the variables must be discretized for the computer to be able to work with them. Introducing the discretization from start one hopes to be able to analytically solve a larger part of the system before using computer simulations \cite{panyella_masterThesis_2019}.
+The second purpose of the discretization is to simulate the system using the lattice Schwinger model on a computer. A computer is not able to handle continuous variables, since this would result in infinitely many points to calculate, thus the variables must be discretized for the computer to be able to work with them. Introducing the discretization from start one hopes to be able to analytically solve a larger part of the system before using computer simulations \cite{panyella_masterThesis_2019}.
 
 As mentioned above, this chapter will focus on the discretization process of the continuum Schwinger model Hamiltonian. Firstly the overall discretization to lattice gauge theory is presented in \cref{sec:Discretization}. In \cref{sec:MappingToSpinSystem} the discretization is taken one step further by mapping the operators and fields to spin operators, since spin systems are well known and thus we already know how to manipulate them. This is done in two steps: The matter fields are mapped to spin-\half operators through the Jordan-Wigner transformation (\cref{sec:Jordan-WignerTransformation}) and the gauge field operator is mapped to spin-$S$ operators using quantum link models (\cref{eq:QuantumLinkModel}). Lastly in \cref{sec:SpinModelOfTheLatticeSchwingerModel} the (1+1)-dimensional Schwinger model Hamiltonian is rewritten in terms of the spin operators.
 
@@ -21,7 +21,7 @@ As in \cref{sec:ContinuumSchwingerModelHamiltonianDensity} we will in this chapt
 
 \section{Discretization} \label{sec:Discretization}
 
-In this section we will be discretizing the continuum Schwinger model Hamiltonian, \cref{eq:ContinuumSchwingerModelHamiltonian}. We chose to only discretize space while keeping the time continuous, thus the discretization will follow Refs. \cite{sriganish_PhD_LatticeSchwingerModel_2001, smit_introToQuantumFieldsOnALattice_2003}. The discretization of the space accomplished by considering the space as an infinite lattice, where the matter is restricted to only live on the lattice sites, thus the spacial coordinates are discretized as
+In this section we will be discretizing the continuum Schwinger model Hamiltonian, \cref{eq:ContinuumSchwingerModelHamiltonian}. We chose to only discretize space while keeping the time continuous, thus the discretization will follow Refs. \cite{sriganish_PhD_LatticeSchwingerModel_2001, smit_introToQuantumFieldsOnALattice_2003}. The discretization of the space is accomplished by considering the space as an infinite lattice, where the matter is restricted to only live on the lattice sites, thus the spacial coordinates are discretized as
 \begin{align}
     x \rightarrow x_n &= an \: ,
 \end{align}
@@ -31,7 +31,7 @@ where $a$ is the lattice spacing and $n$ the lattice site number. Thus the matte
 \end{align}
 with the lattice spacing multiplied for the correct spacing between the matter sites.
 
-When discretizing the spatial derivative, one might propose the derivative to be the the difference in the field at two nearby sites divided by the lattice spacing, $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$, but this turns out to cause difficulties, namely the \emph{lattice fermion doubling}\index{fermion doubling}\index{lattice fermion doubling|see{fermion doubling}} problem. This is a problem of degeneracy of fermions, which is $2^d$ for $d$ discretized dimensions, thus the discretized theory will include $2^d$ fermions for each original (continuum) fermion \cite{GoswamiBandyopadhyay_FermionDoubling_1997}. Instead of having $2^1 = 2$ fermions in our space discretized (1+1)-dimensional model, we will instead solve the fermion doubling problem by imposing \emph{staggered fermions}\index{staggered fermions} also known as Kogut-Susskind fermions\index{Kogut-Susskind fermions|see{staggered fermions}} \cite{susskind_latticeFermions_1977, banksSusskindKogut_StrongCoupling_1976}: One replaces the four-component spinor $\psi$ with a two-component spinor, $\psi_n$, which entries corresponds to the two possible spin states, and one impose $\psi_n$ at even $n$ to represent the matter field of a particle, while representing an antiparticle for $n$ being odd, see \cref{fig:StaggeredFermionsOnALattice}. By representing either a particle or an antiparticle, the matter fields necessitates a staggered mass term, $(-1)^n \psi_n\dagger m \psi_n$, to replace the mass term in \cref{eq:ContinuumSchwingerModelHamiltonian} \cite{susskind_latticeFermions_1977}, such that particles are associated with positive mass while antiparticles are associated with negative mass. Now for discretizing the spatial derivative of the matter field, one still employs the difference of the two nearby matter fields divided by the distance between them, now the nearby fields shall just be interpreted as the two nearby particle or antiparticle matter fields, thus \cite{susskind_latticeFermions_1977}
+When discretizing the spatial derivative, one might propose the derivative to be the the difference in the field at two nearby sites divided by the lattice spacing, $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$, but this turns out to cause difficulties, namely the \emph{lattice fermion doubling}\index{fermion doubling}\index{lattice fermion doubling|see{fermion doubling}} problem. This is a problem of degeneracy of fermions, which is $2^d$ for $d$ discretized dimensions, thus the discretized theory will include $2^d$ fermions for each original (continuum) fermion \cite{GoswamiBandyopadhyay_FermionDoubling_1997}. Instead of having $2^1 = 2$ fermions in our space discretized (1+1)-dimensional model, we will instead solve the fermion doubling problem by imposing \emph{staggered fermions}\index{staggered fermions} also known as Kogut-Susskind fermions\index{Kogut-Susskind fermions|see{staggered fermions}} \cite{susskind_latticeFermions_1977, banksSusskindKogut_StrongCoupling_1976}: One replaces the four-component spinor $\psi$ with a two-component spinor, $\psi_n$, which entries corresponds to the two possible spin states, and one impose $\psi_n$ at even $n$ to represent the matter field of a particle, while representing an antiparticle for $n$ being odd, see \cref{fig:StaggeredFermionsOnALattice}. By representing either a particle or an antiparticle, the matter fields necessitates a staggered mass term, $(-1)^n \psi_n\dagger m \psi_n$, to replace the mass term in \cref{eq:ContinuumSchwingerModelHamiltonian} \cite{susskind_latticeFermions_1977}, such that particles are associated with positive mass while antiparticles are associated with negative mass. Now for discretizing the spatial derivative of the matter field, one still employs the difference of the two nearby matter fields divided by the distance between them, but the nearby fields shall just be interpreted as the two nearby either particle or antiparticle matter fields, thus \cite{susskind_latticeFermions_1977}
 \begin{align}
     \partial_1 \psi &\rightarrow \frac{\psi_{n+1} - \psi_{n-1}}{2a} \: .
 \end{align}
@@ -73,11 +73,11 @@ When discretizing the spatial derivative, one might propose the derivative to be
     \label{fig:StaggeredFermionsOnALattice}
 \end{figure}
 
-Having restricted matter fields to live only at the lattice sites it is natural to propose the gauge fields (thus also the electric fields), which couple to the matter fields, to live at the lattice links connecting the lattice sites \cite{melnikov_latticeSchwingerModel_2000}. We will define $A_n$ (thus also $E_n$) to be the field at the lattice link between sites $n$ and $n + 1$, see \cref{fig:StaggeredFermionsOnALattice}. Discretizing using only the above stated information will result in a non-locally gauge invariant Hamiltonian, due to the product of fermionic matter fields at from different latter sites -- the term containing $\psibar\partial_1\psi$ -- but it can be made locally gauge invariant by compensating for the matter fields done by introducing the unitary \emph{link operator}\index{link operator}
+Having restricted matter fields to live only at the lattice sites it is natural to propose the gauge fields (thus also the electric fields), which couple to the matter fields, to live at the lattice links connecting the lattice sites \cite{melnikov_latticeSchwingerModel_2000}. We will define $A_n$ (thus also $E_n$) to be the field at the lattice link between sites $n$ and $n + 1$, see \cref{fig:StaggeredFermionsOnALattice}. Discretizing using only the above stated information will result in a non-locally gauge invariant Hamiltonian, due to the product of fermionic matter fields at different latter sites -- the term containing $\psibar\partial_1\psi$ -- but it can be made locally gauge invariant by compensating for the matter fields by introducing the unitary \emph{link operator}\index{link operator}
 \begin{align}
     U_n &= \exp{iaqA_n}
 \end{align}
-living on the links between matter sites, and restricting the gauge field to only enter the discretized Hamiltonian through this operator \cite{banksSusskindKogut_StrongCoupling_1976}. Using the generator of the U(1) symmetry, \cref{eq:GeneratorU(1)SymmetryContinuum}, discretized using the above stated techniques and that the derivative is discretized by $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$,
+living on the links between matter sites, and restricting the gauge field to only enter the discretized Hamiltonian through this operator \cite{banksSusskindKogut_StrongCoupling_1976}. Using the generator of the U(1) symmetry, \cref{eq:GeneratorU(1)SymmetryContinuum}, discretized using the above stated techniques and with the derivative discretized as $\partial_1 f(x) \rightarrow (f_n - f_{n - 1}) / a$,
 \begin{align} \label{eq:GeneratorU(1)SymmetryDiscretized} \index{generator!of U(1) symmetry!discretized}\index{generator!of U(1) symmetry}
     G_n = \frac{E_n - E_{n-1}}{a} - q \psi_n\dagger \psi_n \: ,
 \end{align}
@@ -92,7 +92,7 @@ We have now introduced all the tools needed to discretize the continuum Schwinge
     \int \dd{x} \left[ \psi\dagger m \psi + \frac{1}{2} E_1 E^1 \right]
     &\rightarrow a \sum_n \left[ (-1)^n m \psi_n\dagger \psi_n + \frac{1}{2} E_n^2 \right] \: ,
 \end{align}
-which is already locally gauge invariant terms according to \cref{eq:LatticeGaugeTheory_LocallyGaugeInvariantTerms}. Taking into account the staggered mass, the first term approaches the mass term of the continuum Hamiltonian, and the second approaches the electric field term, thus \cref{eq:LatticeSchwingerModel_MassAndElectricFieldPart} shall be used for the discretized Hamiltonian. Considering now the last terms of the continuum Schwinger model Hamiltonian one notices that
+which is already locally gauge invariant terms according to \cref{eq:LatticeGaugeTheory_LocallyGaugeInvariantTerms}. Taking the staggered mass into account, the first term approaches the mass term of the continuum Hamiltonian, and the second approaches the electric field term, thus \cref{eq:LatticeSchwingerModel_MassAndElectricFieldPart} shall be used for the discretized Hamiltonian. Considering now the last terms of the continuum Schwinger model Hamiltonian one notices that
 \begin{align} \label{eq:LatticeSchwingerModel_DifferentialPart}
 \begin{split}
     \int \dd{x} &\left( -i\psi\dagger \left[ \partial_1 + iqA_1 \right] \psi \right) \\
@@ -103,13 +103,13 @@ which is already locally gauge invariant terms according to \cref{eq:LatticeGaug
     \simeq& -\frac{ia}{2a} \sum_n \left( \psi_n\dagger U_n \psi_{n+1} - \mathrm{h.c.} \right) \: ,
 \end{split}
 \end{align}
-where $+\mathrm{h.c.}$ denotes the addition of the Hermitian conjugate of the previous terms, and $2\psi_n\dagger \psi_{n+1} = \psi_n\dagger \psi_{n+1} + \psi_{n+1}\dagger \psi_n$ is due to \ldots . In all of the above the gamma-matrices have disappeared, but this turns out to not be a problem since the disappearance of these corresponds to a specific choise of $2 \times 2$ matrices added when performing the continuum limit properly \cite{panyella_masterThesis_2019}.
+where $-\mathrm{h.c.}$ denotes the subtraction of the Hermitian conjugate of the previous terms, and $2\psi_n\dagger \psi_{n+1} = \psi_n\dagger \psi_{n+1} + \psi_{n+1}\dagger \psi_n$ is due to \ldots . In all of the above the gamma-matrices have disappeared, but this turns out to not be a problem since the disappearance of these corresponds to a specific choise of $2 \times 2$ matrices added when performing the continuum limit properly \cite{panyella_masterThesis_2019}.
 
 Combining the locally gauge invariant terms found in \cref{eq:LatticeSchwingerModel_MassAndElectricFieldPart,eq:LatticeSchwingerModel_DifferentialPart} the discretized Hamiltonian of the lattice Schwinger model\index{Hamiltonian!of Schwinger model!lattice}\index{Schwinger model!lattice} becomes
 \begin{align} \label{eq:LatticeSchwingerModelHamiltonian}
     H &= a \sum_n \left[ (-1)^n m \psi_n\dagger \psi_n - \frac{i}{2a}\left(\psi_n\dagger U_n\psi_{n+\hat{1}} - \mathrm{h.c.}\right) + \frac{1}{2}E_n^2 \right] \: ,
 \end{align}
-which in the continuum limit $a \rightarrow 0$ replicates the continuum Schwinger model Hamiltonian.
+which in the continuum limit $a \rightarrow 0$ reproduces the continuum Schwinger model Hamiltonian.
 
 
 
@@ -130,7 +130,7 @@ Remembering the definition of the step spin operators \cite{sakurai_modernQM_201
 \begin{align} \index{sigmaplus@$\sigma^+$}\index{sigmaminus@$\sigma^-$}
     \sigma^\pm &= \frac{\sigma_x \pm i \sigma_y}{2} \: ,
 \end{align}
-one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice site due to $A_n B_m$ for $n \ne m$ is short notation of the tensor product $A_n \otimes B_m$, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
+one may easily find the anticommutator between these for the same lattice site to be $\anticommutator{\sigma_n^+}{\sigma_n^-} = 1$, as would also be expected from the creation and annihilation operators, $\anticommutator{\psi_n\dagger}{\psi_n} = 1$. Thus one might be tempted to use the direct mapping $\psi_n\dagger = \sigma_n^+$ and $\psi_n = \sigma_n^-$, but then the operators would commute for different lattice sites ($n \ne m$) \cite{susskind_latticeFermions_1977}, $\commutator{\psi_n\dagger}{\psi_m} = \commutator{\sigma_n^+}{\sigma_m^-} = 0$ \footnote{The spin operators only operate on their designated lattice due to them being connecting using the tensor product $A_n B_m = A_n \otimes B_m = (A_n \otimes \id)(\id \otimes B_m)$, thus operators with $n \ne m$ won't interfere with each other.}, which is not the case for fermionic operators, for which these must always anticommute \cite{sakurai_modernQM_2017}, $\anticommutator{\psi_n\dagger}{\psi_m} = 0$.
 
 To accommodate the above stated problem we introduce the Jordan-Wigner transformation\index{Jordan-Wigner transformation}
 \begin{align} \label{eq:Jordan-WignerTransformation}
@@ -139,7 +139,7 @@ To accommodate the above stated problem we introduce the Jordan-Wigner transform
     \psi_n\dagger &= \prod_{m=0}^{n-1} (-i\sigma_m^z) \sigma_n^+ \: .
 \end{split}
 \end{align}
-for which the added product part corresponds to all the lattice sites from one end of the lattice to the site concerned, thus ensuring the anticommutator, that the previous stated (direct) transformation did not satisfy. It can fairly easy be shown, that the Jordan-Wigner transformation ensures the correct anticommutators for $n \ne m$
+for which the added product part corresponds to all the lattice sites from one end of the lattice to the site concerned, thus ensuring the anticommutator, which the previous stated (direct) transformation did not satisfy. It can be shown fairly easy, that the Jordan-Wigner transformation ensures the correct anticommutators for $n \ne m$
 \begin{subequations} % Letting all the anticommutators be subequations
 \begin{align} % First part of the anticommutators
     \anticommutator{\psi_n}{\psi_m} &= (-1)^n i \anticommutator{\sigma_n^-}{\sigma_n^z} \prod_{l=n+1}^{m-1} (i \sigma_l^z) \sigma_m^- = 0 \: , \\
@@ -148,12 +148,12 @@ for which the added product part corresponds to all the lattice sites from one e
     %
     \anticommutator{\psi_n\dagger}{\psi_m} &= i \anticommutator{\sigma_n^+}{\sigma_n^z} \prod_{l=n+1}^{m-1} (i \sigma_l^z) \sigma_m^- = 0 \: ,
 \end{align} % End first part of the anticommutators
-by splitting the product parts\footnote{The product parts shall be split into into three parts: $[0,\ldots,n-1]$, $n$ and $[n+1,\ldots,m-1]$, thus requiring $m > n$, but due to the definition of anticommutators $\anticommutator{A}{B} = \anticommutator{B}{A}$, thus all cases of $n \ne m$ are covered.} and using the anticommutators $\anticommutator{\sigma_n^\pm}{\sigma_n^z} = 0$ and $\anticommutator{\sigma_n^\pm}{\sigma_m^z} = 0$, while the transformation still preserves the anticommutator
+by splitting the product parts\footnote{The product parts shall be split into into three parts: $[0,\ldots,n-1]$, $n$ and $[n+1,\ldots,m-1]$, thus requiring $m > n$, but due to the definition of anticommutators $\anticommutator{A}{B} = \anticommutator{B}{A}$, thus one can switch all the indices ($n \leftrightarrow m$) and while the equations remain true. Therefore all cases of $n \ne m$ are covered.} and using the anticommutators $\anticommutator{\sigma_n^\pm}{\sigma_n^z} = 0$ and $\anticommutator{\sigma_n^\pm}{\sigma_m^z} = 0$, while the transformation still preserves the anticommutator
 \begin{align} % Second part of the anticommutators
     \anticommutator{\psi_n\dagger}{\psi_n} &= \anticommutator{\sigma_n^+}{\sigma_n^-} = 1 ,
 \end{align} % End second part of the anticommutators
 \end{subequations} % Letting all the anticommutators be subequations
-due to the added product part in this case cancels with itself. Due to the possibility of inverting the Jordan-Wigner transformation \cite{jordan-wigner_1928} the two formulations -- the spin formulation and the creation and annihilation operator formalism -- are equivalent, thus exactly the same information is contained in the system in both formalisms \cite{panyella_masterThesis_2019}.
+due to the added product part in this case cancels with itself. Due to the possibility of inverting the Jordan-Wigner transformation \cite{jordan-wigner_1928} the two formulations -- the spin formulation and the creation and annihilation operator formalism -- are equivalent, hence exactly the same information is contained in the system in both formalisms \cite{panyella_masterThesis_2019}.
 \index{Jordan-Wigner transformation|)}
 
 
@@ -161,7 +161,7 @@ due to the added product part in this case cancels with itself. Due to the possi
 \index{quantum link model|(}
 \subsection{Quantum link models} \label{sec:QuantumLinkModels}
 
-In \cref{sec:Discretization} we made the first approximations to our continuum theory by discretizing it, and in this section we will further approximate the discretized theory for it to be expressed by spins \cite{Hauke_QLM_2013}, which is a system well suited for quantum computation, since we are familiar with manipulating it. This further approximation is done using \emph{quantum link models}\index{quantum link model}, which restricts the Hilbert space of the gauge fields to be finite instead of infinite \cite{Barros_GaugeTheoriesWithUltracoldAtoms_2020}, since the latter is not fit for computer simulations.
+In \cref{sec:Discretization} we made the first approximations to our continuum theory by discretizing it, and in this section we will further approximate the discretized theory for it to be expressed by spins \cite{Hauke_QLM_2013}, which is a system well suited for quantum computation, since we are familiar with manipulating it. This further approximation is done using \emph{quantum link models}\index{quantum link model}, which restricts the Hilbert space of the gauge fields to be finite instead of infinite \cite{Barros_GaugeTheoriesWithUltracoldAtoms_2020}. %, since the latter is not fit for computer simulations.
 
 In the quantum link models the link operator will no longer be connected to the continuum theory by $U = \exp{iaqA_n}$ but instead we let go of the unitarity of the operator and impose $U$ to be an independent operator with commutation relation \cite{panyella_masterThesis_2019}
 \begin{align} \label{eq:QLMCommutator}
@@ -171,11 +171,12 @@ which conserves the gauge symmetry and do not interfere with commutation relatio
 \begin{align} \label{eq:LGTCommutator}
     \commutator{E_n}{U_n} = iaq \commutator{E_n}{A_n} U_n = aq U_n \: ,
 \end{align}
-where $\commutator{A_n}{E_m} = i \delta_{n,m}$ since $E_n$ is the conjugate momentum field of $A_n$. The commutators \cref{eq:QLMCommutator,eq:LGTCommutator} are reminiscent of the SU(2) algebra of angular momentum \cite{Barros_GaugeTheoriesWithUltracoldAtoms_2020, widmer_PhD_2dQuantumLinkModels_2015}, and stating $U_n$ and $U_n\dagger$ to be the step-up and -down operators respectively, and $E_n$ be the $z$-component of the angular momentum, with the correct proportionality constant, one shows that one in fact obtains the correct commutations relations
+where $\commutator{A_n}{E_m} = i \delta_{n,m}$ since $E_n$ is the conjugate momentum field of $A_n$ (see \cref{sec:ContinuumSchwingerModelHamiltonianDensity}). The commutators \cref{eq:QLMCommutator,eq:LGTCommutator} are reminiscent of the SU(2) algebra of angular momentum \cite{Barros_GaugeTheoriesWithUltracoldAtoms_2020, widmer_PhD_2dQuantumLinkModels_2015}, thus stating $U_n$ and $U_n\dagger$ to be the step-up and -down operators respectively and $E_n$ be the $z$-component of the angular momentum -- with the correct proportionality constant -- one obtains the correct commutations relations
 \begin{align}
-    \commutator{L_i}{L_j} &= i \epsilon_{ijk}L_k
+    \commutator{L_i}{L_j} &= i \epsilon_{ijk}L_k \: .
 \end{align}
-for $i,j,k = x,y,z$ and $\epsilon_{ijk}$ being the Levi-Civita symbol defining the sign depending on the permutation being even or odd ($+1$ if the permutation is even, i.e. the indices occur in cyclic order, or $-1$ if the permutation is odd, i.e. indices occur in reverse cyclic order) or being $0$ if there is no permutation, i.e. the index is repeated.
+Here $i,j,k = x,y,z$ and $\epsilon_{ijk}$ is the Levi-Civita symbol defined such that even and odd permutations of $ijk$ yields $+1$ and $-1$ respectively and no permutation, i.e. repeated indices, yields $0$.
+% Here $i,j,k = x,y,z$ and $\epsilon_{ijk}$ is the Levi-Civita symbol defining the sign depending on the permutation being even or odd ($+1$ if the permutation is even, i.e. the indices occur in cyclic order, or $-1$ if the permutation is odd, i.e. indices occur in reverse cyclic order) or being $0$ if there is no permutation, i.e. the index is repeated.
 
 Now letting the angular momentum be that of the spin formalism, $E_n$, $U_n$ and $U_n\dagger$ can be represented by finite spin $S$ using the spin operators $S^i$ ($i=z,+,-$) as
 \begin{align} \label{eq:QuantumLinkModel}
@@ -195,12 +196,12 @@ Equipped with the tools of transforming matter fields and gauge fields to be dep
 \begin{align} \label{eq:LatticeSchwingerModelHamiltonianSpin}
 \begin{split}
     H &= a \sum_n \left[ (-1)^n m \sigma_n^+ \sigma_n^- - \frac{i}{2a} \left( \sigma_n^+ S_n^+ i \sigma_n^z \sigma_{n+1}^- - \mathrm{h.c.} \right) + \frac{1}{2} \left( aq S S_n^z \right)^2 \right] \\
-        &= a \sum_n \left[ (-1)^{n+1} \frac{m}{2} \sigma_n^z - \frac{1}{2a} \left( \sigma_n^+ S_n^+ \sigma_{n+1}^- + \mathrm{h.c.} \right) + \frac{a^2 q^2 S^2}{2} \left( S_n^z \right)^2 \right] \: ,
+        &= a \sum_n \left[ (-1)^n \frac{m}{2} \sigma_n^z - \frac{1}{2a} \left( \sigma_n^+ S_n^+ \sigma_{n+1}^- + \mathrm{h.c.} \right) + \frac{a^2 q^2 S^2}{2} \left( S_n^z \right)^2 \right] \: ,
 \end{split}
 \end{align}
 \index{Schwinger model!lattice!spin formulation|)}
 \index{Hamiltonian!of Schwinger model!lattice!spin formulation|)}
-where we have used the fact that the multiplication of the step up and down spin operators is $\sigma_n^+ \sigma_n^- = (1 - \sigma_n^z)/2$, where the offset constant has been removed, due to it not changing the physics, that the Hermitian conjugate of the imaginary unit is $i\dagger = -i$, and that $\sigma_n^+ \sigma_n^z = -\sigma_n^+$ \footnote{This can be used since the operators on different sites and links are connected using the tensor product, i.e. $A_n B_m C_n = (A_n \otimes \id) (\id \otimes B_m) (C_n \otimes \id) = (A_n C_n) \otimes B_m$ for $n \ne m$, thus $\sigma_n^z$ can be ''pulled through'' $S_n^+$ due to the identity in the tensor product.} thus $(-\sigma_n^+)\dagger = - (\sigma_n^+)\dagger$.
+where we have used the fact that the multiplication of the step up and down spin operators is $\sigma_n^+ \sigma_n^- = (1 + \sigma_n^z)/2$, where the offset constant has been removed due to being physically irrelevant, that the Hermitian conjugate of the imaginary unit is $i\dagger = -i$, and that $\sigma_n^+ \sigma_n^z = -\sigma_n^+$ \footnote{This can be used since the operators on different sites and links are connected using the tensor product, i.e. $A_n B_m C_n = (A_n \otimes \id) (\id \otimes B_m) (C_n \otimes \id) = (A_n C_n) \otimes B_m$ for $n \ne m$, thus $\sigma_n^z$ can be ''pulled through'' $S_n^+$ due to the identity in the tensor product.} thus $(-\sigma_n^+)\dagger = - (\sigma_n^+)\dagger$.
 
 
 
